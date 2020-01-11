@@ -20,61 +20,69 @@
 </head>
 
 <body>
-    <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn">&times;</a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'register' %}">Register</a>
-        {% endif %}
-    </div>
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="/media/img/logo_trainingshub.svg" class="d-inline-block align-top" alt="logo">
-            De Trainingshub
-        </a>
-        <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
-            <span id="navbtn"><i class="fas fa-bars"></i></spanid="navbtn"><i class="fas fa-bars"></i>
-        </button>
-
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-                {% endif %}
-            </ul>
+    <header>
+        <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            {% endif %}
         </div>
-    </nav>
 
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="/media/img/logo_trainingshub.svg" class="d-inline-block align-top" alt="logo">
+                De Trainingshub
+            </a>
+            <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                <span id="navbtn"><i class="fas fa-bars"></i></spanid="navbtn"><i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
     <!-- <span id="navbtn"><i class="fas fa-bars"></i></span> -->
+    <main>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor%}
+        {% endif%}
 
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-        {{ message }}
-    </div>
-    {% endfor%}
-    {% endif%}
-
-    {% block content %}
-    {% endblock content %}
-
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <Footer class="bg-dark text-light">
+        <div class="container">
+            <p>About</p>
+            <p>Pricing</p>
+            <p>Etc.</p>
+        </div>
+    </Footer>
     <div class="overlay"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

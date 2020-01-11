@@ -1,0 +1,83 @@
+/* STICKY FOOTER */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+  }
+
+/* NAVBAR */
+ nav img {
+    height: 30px;
+    width: auto;
+ }
+
+ .account-image {
+     max-width: 100px;
+     height: auto;
+ }
+ /* The side navigation menu */
+ .sidenav {
+     height: 100%;
+     width: 0;
+     position: fixed;
+     z-index: 9999;
+     top: 0;
+     left: 0;
+     background-color: #636DC3;
+     overflow-x: hidden;
+     padding-top: 60px;
+     transition: all 0.5s ease-in-out;
+ }
+
+ .sidenav a {
+     padding: 8px 8px 8px 32px;
+     text-decoration: none;
+     font-size: 25px;
+     color: #ffffff;
+     display: block;
+     transition: 0.3s;
+ }
+
+ .sidenav a:hover {
+     color: #f1f1f1;
+ }
+
+ .sidenav .closebtn {
+     position: absolute;
+     top: 0;
+     right: 25px;
+     font-size: 36px;
+     margin-left: 50px;
+ }
+
+ .overlay {
+     display: none;
+     position: fixed;
+     width: 100vw;
+     height: 100vh;
+     background: rgba(0, 0, 0, 0.4);
+     z-index: 9998;
+     opacity: 0;
+     transition: all 0.5s ease-in-out;
+     top: 0;
+ }
+
+ .overlay.active {
+     display: block;
+     opacity: 1;
+ }
+
+ /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+ @media screen and (max-height: 450px) {
+     .sidenav {
+         padding-top: 15px;
+     }
+
+     .sidenav a {
+         font-size: 18px;
+     }
+ }
