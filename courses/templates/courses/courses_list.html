@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for course in object_list %}
+<div class="container panel mt-3 border rounded">
+    <div class="row panel-header border-bottom">
+        <img class="d-none d-md-block col-md-2" src="{{ course.image.url }}" alt="image {{ course.name }}">
+        <h1 class="align-middle">{{ course.name }}</h1>
+    </div>
+    <div class="row panel-body">
+        <!-- panel left -->
+        <div class="panel-left col-md-4 border-right">
+            <small class="text-muted">
+                Suited for:
+            </small>
+            <div>
+                {% if course.ngt %}
+                <span>NGT, </span>
+                {% endif%}
+                {% if course.schrijftolk %}
+                <span>Schrijftolk, </span>
+                {% endif%}
+                {% if course.asl %}
+                <span>ASL, </span>
+                {% endif%}
+                {% if course.combitolk %}
+                <span>Combitolk.</span>
+                {% endif%}
+            </div>
+            <small class="text-muted">
+                Credit:
+            </small>
+            <div>
+                {% if course.credit_language_and_interpreting_skills != 0 %}
+                {{ course.credit_language_and_interpreting_skills }} for Language and Interpreting skills
+                {% endif %}
+            </div>
+            <div>
+                {% if course.credit_attitude != 0 %}
+                {{ course.credit_attitude }} for Attitude skills
+                {% endif %}
+            </div>
+            <div>
+                {% if course.credit_target_audiences != 0 %}
+                {{ course.credit_target_audiences }} for Target Audience skills
+                {% endif %}
+            </div>
+            <small class="text-muted">
+                Date:
+            </small>
+            <div>
+                {{ course.starts|date:"d F Y" }}
+            </div>
+            <small class="text-muted">
+                Starts at:
+            </small >
+            <div>
+                {{ course.starts|time:"H:i" }}
+            </div>
+            <small class="text-muted">
+                Ends at:
+            </small>
+            <div>
+                {{ course.ends|time:"H:i" }}
+            </div>
+            <small class="text-muted">
+                Price:
+            </small>
+            <div>
+                € {{ course.costs }}
+            </div>
+            <small class="text-muted">
+                Location:
+            </small>
+            <div>
+                {{ course.location.name }}<br>
+                {{ course.location.street_address }}<br>
+                {{ course.location.postcode }} {{ course.location.city }}
+            </div>
+        </div>
+        <!-- panel right -->
+        <div class="col-md-8">
+            {{ course.description | linebreaks }}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock content %}
