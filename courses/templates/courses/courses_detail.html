@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for course in object_list %}
 <div class="container panel mt-3 border rounded">
     <div class="row panel-header border-bottom">
-        <img class="d-none d-md-block col-md-2" src="{{ course.image.url }}" alt="image {{ course.name }}">
-        <h1 class="align-middle">{{ course.name }}</h1>
+        <img class="d-none d-md-block col-md-2" src="{{ object.image.url }}" alt="image {{ object.name }}">
+        <h1 class="align-middle">{{ object.name }}</h1>
     </div>
     <div class="row panel-body">
         <!-- panel left -->
@@ -13,16 +12,16 @@
                 Suited for:
             </small>
             <div>
-                {% if course.ngt %}
+                {% if object.ngt %}
                     <span>NGT, </span>
                 {% endif%}
-                {% if course.schrijftolk %}
+                {% if object.schrijftolk %}
                     <span>Schrijftolk, </span>
                 {% endif%}
-                {% if course.asl %}
+                {% if object.asl %}
                     <span>ASL, </span>
                 {% endif%}
-                {% if course.combitolk %}
+                {% if object.combitolk %}
                     <span>Combitolk.</span>
                 {% endif%}
             </div>
@@ -30,59 +29,58 @@
                 Credit:
             </small>
             <div>
-                {% if course.credit_language_and_interpreting_skills != 0 %}
-                {{ course.credit_language_and_interpreting_skills }} for Language and Interpreting skills
+                {% if object.credit_language_and_interpreting_skills != 0 %}
+                {{ object.credit_language_and_interpreting_skills }} for Language and Interpreting skills
                 {% endif %}
             </div>
             <div>
-                {% if course.credit_attitude != 0 %}
-                {{ course.credit_attitude }} for Attitude skills
+                {% if object.credit_attitude != 0 %}
+                {{ object.credit_attitude }} for Attitude skills
                 {% endif %}
             </div>
             <div>
-                {% if course.credit_target_audiences != 0 %}
-                {{ course.credit_target_audiences }} for Target Audience skills
+                {% if object.credit_target_audiences != 0 %}
+                {{ object.credit_target_audiences }} for Target Audience skills
                 {% endif %}
             </div>
             <small class="text-muted">
                 Date:
             </small>
             <div>
-                {{ course.starts|date:"d F Y" }}
+                {{ object.starts|date:"d F Y" }}
             </div>
             <small class="text-muted">
                 Starts at:
             </small >
             <div>
-                {{ course.starts|time:"H:i" }}
+                {{ object.starts|time:"H:i" }}
             </div>
             <small class="text-muted">
                 Ends at:
             </small>
             <div>
-                {{ course.ends|time:"H:i" }}
+                {{ object.ends|time:"H:i" }}
             </div>
             <small class="text-muted">
                 Price:
             </small>
             <div>
-                € {{ course.costs }}
+                € {{ object.costs }}
             </div>
             <small class="text-muted">
                 Location:
             </small>
             <div>
-                {{ course.location.name }}<br>
-                {{ course.location.street_address }}<br>
-                {{ course.location.postcode }} {{ course.location.city }}
+                {{ object.location.name }}<br>
+                {{ object.location.street_address }}<br>
+                {{ object.location.postcode }} {{ object.location.city }}
             </div>
         </div>
         <!-- panel right -->
         <div class="col-md-8">
-            {{ course.description | linebreaks }}
+            {{ object.description | linebreaks }}
         </div>
     </div>
 </div>
 
-{% endfor %}
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
@@ -36,6 +36,10 @@ class Courses(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     description = models.TextField(null=True)
     image = models.ImageField(default='img/logo_trainingshub.svg', upload_to='course_pics')
+    places = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.starts} - {self.name}'
+
+    def get_absolute_url(self):
+        return reverse('course-detail', kwargs={'pk': self.pk})
