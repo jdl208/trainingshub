@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Courses
+from .forms import NewCourseForm
 
 
 class CourseListView(ListView):
@@ -14,7 +15,9 @@ class CourseDetailView(DetailView):
 
 
 class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
-    # Tests if a user is a staffmember so they can CRUD courses
+    """
+    Tests if a user is a staffmember so they can CRUD courses
+    """
     def test_func(self):
         if self.request.user.is_staff:
             return True
@@ -22,47 +25,24 @@ class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
 
 
 class CourseCreateView(StaffRequiredMixin, CreateView):
+    """
+    If user is staff the she can create new courses.
+    """
     model = Courses
-    fields =['name',
-             'course_type',
-             'ngt',
-             'schrijftolk',
-             'asl',
-             'combitolk',
-             'credit_language_and_interpreting_skills',
-             'credit_attitude',
-             'credit_target_audiences',
-             'starts',
-             'ends',
-             'costs',
-             'location',
-             'description',
-             'places',
-             'image',
-             ]
+    form_class = NewCourseForm
 
     
 class CourseUpdateView(StaffRequiredMixin, UpdateView):
+    """
+    If user is staf, she can update the course
+    """
     model = Courses
-    fields =['name',
-             'course_type',
-             'ngt',
-             'schrijftolk',
-             'asl',
-             'combitolk',
-             'credit_language_and_interpreting_skills',
-             'credit_attitude',
-             'credit_target_audiences',
-             'starts',
-             'ends',
-             'costs',
-             'location',
-             'description',
-             'places',
-             'image',
-             ]
+    form_class = NewCourseForm
 
 
 class CourseDeleteView(StaffRequiredMixin, DeleteView):
+    """
+    If user is staf, she can delete the course
+    """
     model = Courses
     success_url = '/courses/'
