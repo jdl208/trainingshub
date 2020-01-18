@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from PIL import Image
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
@@ -34,12 +35,22 @@ class Courses(models.Model):
     ends = models.DateTimeField()
     costs = models.DecimalField(decimal_places=2, max_digits=7)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    description = models.TextField(null=True)
-    image = models.ImageField(default='img/logo_trainingshub.svg', upload_to='course_pics')
     places = models.IntegerField(default=0)
+    description = models.TextField(null=True)
+    image = models.ImageField(default='img/logo_trainingshub.png', upload_to='course_pics')
 
     def __str__(self):
         return f'{self.starts} - {self.name}'
 
+    def save(self):
+        super().save()
+        # Resize uploaded image
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+            
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
+    
