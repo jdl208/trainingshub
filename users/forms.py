@@ -14,7 +14,6 @@ class UserRegisterForm(UserCreationForm):
         user = super().save(False)
         user.email = user.username
         user = super().save()
-
         return user
 
 class UserUpdateForm(forms.ModelForm):
@@ -29,7 +28,6 @@ class UserUpdateForm(forms.ModelForm):
         user = super().save(False)
         user.email = user.username
         user = super().save()
-
         return user
     
 class ProfileUpdateForm(forms.ModelForm):
