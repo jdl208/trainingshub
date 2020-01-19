@@ -13,4 +13,8 @@ $(document).ready(function () {
         $(".overlay").removeClass("active");
         $("#mySidenav").width(0);
     });
+    // Make tablerows clickable as a link
+    $(".clickable-row").click(function () {
+        window.location = $(this).data("href");
+    });
 });

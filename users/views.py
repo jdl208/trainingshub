@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth, messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from .models import Profile
 
@@ -47,9 +46,18 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+def is_staff(user):
+    return user.is_staff
 
-@staff_member_required
+@user_passes_test(is_staff, login_url='profile')
 def userlist(request):
     users = User.objects.all()
     return render(request, 'users/users_list.html', {'users': users})
+
+
+@user_passes_test(is_staff, login_url='profile')
+def user_detail(request, id):
+    user = User.objects.get(pk=id)
+    return render(request, 'users/user-detail.html', {'user':user})
+    
     

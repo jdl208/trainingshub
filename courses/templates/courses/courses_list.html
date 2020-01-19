@@ -4,7 +4,7 @@
     {% for course in object_list %}
     <a class="text-dark course_link" href="{% url 'course-detail' pk=course.id %}">
         <div class="card mt-3 mb-3">
-            <div class="card-header course-card-header text-light">
+            <div class="card-header bg-purple text-light">
                 {{ course.starts|date:"d F Y" }} - {{ course.name }}
             </div>
             <div class="card-body p-0">

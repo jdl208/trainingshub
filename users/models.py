@@ -5,13 +5,13 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50, null=True)
-    last_name = models.CharField(max_length=50, null=True)
-    company_name = models.CharField(max_length=100, null=True, blank=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    company_name = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=50)
     postcode = models.CharField(max_length=6)
     city = models.CharField(max_length=40)
-    rtgs_nr = models.IntegerField(unique=True, null=True, blank=True)
+    rtgs_nr = models.IntegerField(unique=True, blank=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
 

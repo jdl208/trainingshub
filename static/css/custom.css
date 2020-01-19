@@ -9,7 +9,13 @@ main {
     flex: 1 0 auto;
   }
 
-/* NAVBAR */
+/* COLORS */
+
+.bg-purple {
+    background-color: #636DC3;
+}
+
+  /* NAVBAR */
  nav img {
     height: 30px;
     width: auto;
@@ -81,6 +87,15 @@ main {
          font-size: 18px;
      }
  }
+/* USERS */
+.userlist-img {
+    border-radius: 50%;
+    height: 25px;
+}
+
+.clickable-row:hover {
+    cursor: pointer;
+}
 
  /* COURSES */
  .course_img {
@@ -89,8 +104,4 @@ main {
 
  .course_link:hover{
      text-decoration: none;
- }
-
- .course-card-header {
-     background-color: #636DC3;
  }
