@@ -25,6 +25,9 @@
         <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
         <nav id="mySidenav" class="sidenav">
             <ul class="navbar-nav ml-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+                </li>
                 {% if user.is_authenticated %}
                 {% if user.is_staff %}
                 <li class="nav-item dropdown">
@@ -67,6 +70,9 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+                    </li>
 
                     {% if user.is_authenticated %}
                     {% if user.is_staff %}
