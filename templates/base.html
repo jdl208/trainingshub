@@ -25,10 +25,6 @@
         <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
         <nav id="mySidenav" class="sidenav">
             <ul class="navbar-nav ml-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
-                </li>
-                {% if user.is_authenticated %}
                 {% if user.is_staff %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
@@ -41,6 +37,10 @@
                     </div>
                 </li>
                 {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+                </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                 </li>
@@ -59,8 +59,8 @@
         </nav>
 
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'course-list' %}">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="/media/img/logo_trainingshub.svg" class="d-inline-block align-top mr-3" alt="logo">
                 DE TRAININGSHUB
             </a>
@@ -70,11 +70,6 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
-                    </li>
-
-                    {% if user.is_authenticated %}
                     {% if user.is_staff %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -87,6 +82,12 @@
                         </div>
                     </li>
                     {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                     </li>
@@ -100,6 +101,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
+
                     {% endif %}
                 </ul>
             </div>

@@ -31,8 +31,10 @@ class Courses(models.Model):
     credit_language_and_interpreting_skills = models.FloatField()
     credit_attitude = models.FloatField()
     credit_target_audiences = models.FloatField()
-    starts = models.DateTimeField()
-    ends = models.DateTimeField()
+    date = models.DateField()
+    time = models.TimeField()
+    ends = models.DateField()
+    endtime = models.TimeField()
     costs = models.DecimalField(decimal_places=2, max_digits=7)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     places = models.IntegerField(default=0)
@@ -40,10 +42,13 @@ class Courses(models.Model):
     image = models.ImageField(default='img/logo_trainingshub.png', upload_to='course_pics')
 
     def __str__(self):
-        return f'{self.starts} - {self.name}'
+        return f'{self.date} - {self.name}'
 
-    def save(self):
-        super().save()
+    def get_absolute_url(self):
+        return reverse('course-detail', kwargs={'pk': self.pk})
+    
+    def save(self, *args, **kwargs):
+        super(Courses, self).save(*args, **kwargs)
         # Resize uploaded image
         img = Image.open(self.image.path)
         if img.height > 300 or img.width > 300:
@@ -51,6 +56,3 @@ class Courses(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
             
-    def get_absolute_url(self):
-        return reverse('course-detail', kwargs={'pk': self.pk})
-    

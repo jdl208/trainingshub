@@ -1,32 +1,43 @@
 {% extends 'base.html' %}
+{% load l10n %}
 {% block content %}
 <div class="container">
     {% for course in object_list %}
+    <!-- COURSE CARDLIST -->
+
     <a class="text-dark course_link" href="{% url 'course-detail' pk=course.id %}">
-        <div class="card mt-3 mb-3">
+        <div class="card mt-3 mb-3 shadow">
             <div class="card-header bg-purple text-light">
-                {{ course.starts|date:"d F Y" }} - {{ course.name }}
+                <i class="far fa-calendar-alt"></i> {{ course.date }}
             </div>
             <div class="card-body p-0">
-                <img class="d-none d-md-block float-left mt-0 ml-0 mb-0 mr-2 course_img" src="{{ course.image.url }}"
-                    alt="image {{ course.name }}">
-                <div class="m-2">
-                    {{ course.description|linebreaks|truncatewords:50 }}
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="p-3">
+                            <h5 class="card-title">{{ course.name }}</h5>
+                            <p class="card-text m-2">{{ course.description|linebreaks|truncatewords:50 }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <img class="d-none d-md-block float-right mt-0 ml-0 mb-0 img-fluid" src="{{ course.image.url }}"
+                            alt="image {{ course.name }}">
+                    </div>
                 </div>
             </div>
             <div class="card-footer text-muted">
-                Suited for:
+
+                <i class="fas fa-users mr-2"></i>
                 {% if course.ngt %}
-                <span>NGT, </span>
+                <span>NGT </span>
                 {% endif%}
                 {% if course.schrijftolk %}
-                <span>Schrijftolk, </span>
+                <span>Schrijftolk,= </span>
                 {% endif%}
                 {% if course.asl %}
-                <span>ASL, </span>
+                <span>ASL </span>
                 {% endif%}
                 {% if course.combitolk %}
-                <span>Combitolk.</span>
+                <span>Combitolk</span>
                 {% endif%}
             </div>
         </div>

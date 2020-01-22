@@ -2,8 +2,8 @@ from django import forms
 from .models import Courses
 
 
-class DateTimeInput(forms.DateTimeInput):
-    input_type = 'datetime-local'
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 class NewCourseForm(forms.ModelForm):
@@ -11,6 +11,6 @@ class NewCourseForm(forms.ModelForm):
         model = Courses
         fields = '__all__'
         widgets = {
-            'starts': DateTimeInput(),
-            'ends': DateTimeInput()
+            'date': DateInput(),
+            'ends': DateInput()
         }
