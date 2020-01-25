@@ -5,7 +5,7 @@
     {% for course in object_list %}
     <!-- COURSE CARDLIST -->
 
-    <a class="text-dark course_link" href="{% url 'course-detail' pk=course.id %}">
+    <!-- <a class="text-dark course_link" href="{% url 'course-detail' pk=course.id %}"> -->
         <div class="card mt-3 mb-3 shadow">
             <div class="card-header bg-purple text-light">
                 <i class="far fa-calendar-alt"></i> {{ course.date }}
@@ -13,9 +13,51 @@
             <div class="card-body p-0">
                 <div class="row">
                     <div class="col-md-9">
-                        <div class="p-3">
+                        <div class="pt-3 pb-1 px-3">
                             <h5 class="card-title">{{ course.name }}</h5>
                             <p class="card-text m-2">{{ course.description|linebreaks|truncatewords:50 }}</p>
+                            <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}">More info</a>
+                            <a class="btn btn-sm btn-outline-success" href="#">Sign up</a>
+                            {% if user.is_staff %}
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'course-update' pk=course.id %}">Edit course</a>
+                            {% endif %}
+                            <div class="mt-2 mb-0">
+                                <small class="text-muted">
+                                    <!-- Costs for the course -->
+                                    {% if course.costs != 0 %}
+                                    <i class="fas fa-euro-sign"></i>
+                                    {{ course.costs }}
+                                    {% endif %}
+                                    <!-- Target audience for course -->
+                                    <i class="fas fa-users ml-3"></i>
+                                    {% if course.ngt %}
+                                    <span class="ml-2">NGT </span>
+                                    {% endif%}
+                                    {% if course.schrijftolk %}
+                                    <span class="ml-2">Schrijftolk </span>
+                                    {% endif%}
+                                    {% if course.asl %}
+                                    <span class="ml-2">ASL </span>
+                                    {% endif%}
+                                    {% if course.combitolk %}
+                                    <span class="ml-2">Combitolk</span>
+                                    {% endif%}
+
+                                    <!-- Credtit for course -->
+                                    <i class="far fa-credit-card ml-3"></i>
+                                    {% if course.credit_language_and_interpreting_skills != 0 %}
+                                    <span class="ml-2">{{ course.credit_language_and_interpreting_skills }} Language &
+                                        Interpreting</span>
+                                    {% endif%}
+                                    {% if course.credit_attitude != 0 %}
+                                    <span class="ml-2">{{ course.credit_attitude }} Attitude</span>
+                                    {% endif%}
+                                    {% if course.credit_target_audiences != 0 %}
+                                    <span class="ml-2">{{ course.credit_target_audiences }} Target audience</span>
+                                    {% endif%}
+
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -24,24 +66,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-muted">
-
-                <i class="fas fa-users mr-2"></i>
-                {% if course.ngt %}
-                <span>NGT </span>
-                {% endif%}
-                {% if course.schrijftolk %}
-                <span>Schrijftolk,= </span>
-                {% endif%}
-                {% if course.asl %}
-                <span>ASL </span>
-                {% endif%}
-                {% if course.combitolk %}
-                <span>Combitolk</span>
-                {% endif%}
-            </div>
         </div>
-    </a>
+    <!-- </a> -->
     {% endfor %}
 </div>
 {% endblock content %}
