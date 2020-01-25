@@ -16,6 +16,7 @@ main {
 
 .bg-purple {
     background-color: #636DC3;
+    color: #ffffff;
 }
 
 .text-purple {
@@ -29,6 +30,10 @@ main {
 .btn-outline-purple:hover{
     background-color: #636DC3;
     color: #ffffff;
+}
+
+.border-purple {
+    border: 1px solid #636DC3;
 }
 
 /* NAVBAR */

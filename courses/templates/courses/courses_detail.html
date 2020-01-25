@@ -1,84 +1,78 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container panel mt-3 border rounded">
-    <div class="row panel-header border-bottom">
-        <img class="d-none d-md-block col-md-2" src="{{ object.image.url }}" alt="image {{ object.name }}">
-        <h1 class="align-middle">{{ object.name }}</h1>
-    </div>
-    <div class="row panel-body">
-        <!-- panel left -->
-        <div class="panel-left col-md-4 border-right">
-            <small class="text-muted">
-                Suited for:
-            </small>
-            <div>
-                {% if object.ngt %}
-                    <span>NGT, </span>
-                {% endif%}
-                {% if object.schrijftolk %}
-                    <span>Schrijftolk, </span>
-                {% endif%}
-                {% if object.asl %}
-                    <span>ASL, </span>
-                {% endif%}
-                {% if object.combitolk %}
-                    <span>Combitolk.</span>
-                {% endif%}
-            </div>
-            <small class="text-muted">
-                Credit:
-            </small>
-            <div>
-                {% if object.credit_language_and_interpreting_skills != 0 %}
-                {{ object.credit_language_and_interpreting_skills }} for Language and Interpreting skills
-                {% endif %}
-            </div>
-            <div>
-                {% if object.credit_attitude != 0 %}
-                {{ object.credit_attitude }} for Attitude skills
-                {% endif %}
-            </div>
-            <div>
-                {% if object.credit_target_audiences != 0 %}
-                {{ object.credit_target_audiences }} for Target Audience skills
-                {% endif %}
-            </div>
-            <small class="text-muted">
-                Date:
-            </small>
-            <div>
-                {{ object.starts|date:"d F Y" }}
-            </div>
-            <small class="text-muted">
-                Starts at:
-            </small >
-            <div>
-                {{ object.starts|time:"H:i" }}
-            </div>
-            <small class="text-muted">
-                Ends at:
-            </small>
-            <div>
-                {{ object.ends|time:"H:i" }}
-            </div>
-            <small class="text-muted">
-                Price:
-            </small>
-            <div>
-                € {{ object.costs }}
-            </div>
-            <small class="text-muted">
-                Location:
-            </small>
-            <div>
-                {{ object.location.name }}<br>
-                {{ object.location.street_address }}<br>
-                {{ object.location.postcode }} {{ object.location.city }}
-            </div>
+<div class="container shadow-lg mt-3">
+    <div class="row">
+        <div class="col-md-9 px-md-5">
+            <h2 class="text-purple mt-3 border-bottom">{{ object.name }}</h2>
+
+            <img class="float-md-left img-fluid mr-3" src="{{ object.image.url }}" alt="image {{ object.name }}">
+            <span class="text-justify">{{ object.description | linebreaks }}</span>
+
         </div>
-        <!-- panel right -->
-        <div class="col-md-8">
-            {{ object.description | linebreaks }}
+        <div class="col-md-3 bg-purple rounded">
+            <legend class="mt-3 border-bottom">Course info</legend>
+            <!-- DATE AND TIME COURSE -->
+            <div class="mt-3 ml-2">
+                <i class="far fa-calendar-alt mr-2"></i>
+                <span class="ml-2">{{ object.date }}</span>
+            </div>
+            <div class="m-2">
+                <i class="far fa-clock mr-2"></i>
+                <span class="ml-2">{{ object.time }} - {{ object.endtime }}</span>
+            </div>
+            <!-- Costs for the course -->
+            <div class="m-2">
+                {% if object.costs != 0 %}
+                <i class="fas fa-euro-sign mr-3"></i>
+                <span class="ml-2">{{ object.costs }}</span>
+                {% endif %}
+            </div>
+            <!-- Target audience for course -->
+            <div class="m-2">
+                <i class="fas fa-users float-left  mr-3"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    {% if object.ngt %}
+                    <li>NGT </li>
+                    {% endif%}
+                    {% if object.schrijftolk %}
+                    <li>Schrijftolk </li>
+                    {% endif%}
+                    {% if object.asl %}
+                    <li>ASL </li>
+                    {% endif%}
+                    {% if object.combitolk %}
+                    <li>Combitolk</li>
+                    {% endif%}
+                </ul>
+            </div>
+            <!-- Credtit for course -->
+            <div class="ml-2">
+                <i class="far fa-credit-card float-left mr-3"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    {% if object.credit_language_and_interpreting_skills != 0 %}
+                    <li class="overflow-hidden">{{ object.credit_language_and_interpreting_skills }} Language &
+                        Interpreting</li>
+                    {% endif%}
+                    {% if object.credit_attitude != 0 %}
+                    <li class="overflow-hidden">{{ object.credit_attitude }} Attitude</li>
+                    {% endif%}
+                    {% if object.credit_target_audiences != 0 %}
+                    <li class="overflow-hidden">{{ object.credit_target_audiences }} Target audience</li>
+                    {% endif%}
+                </ul>
+            </div>
+            <!-- COURSE LOCATION -->
+            <div class="ml-2">
+                <i class="fas fa-map-marker-alt float-left mr-3"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    <li>{{object.location.name}}</li>
+                    <li>{{object.location.street_address}}</li>
+                    <li>{{object.location.postcode}} {{object.location.city}}</li>
+                </ul>
+            </div>
+            <div class="text-center mb-3">
+                <a class="btn btn-light text-purple btn-outline-purple" href="">Sign up</a>
+            </div>
         </div>
     </div>
 </div>
