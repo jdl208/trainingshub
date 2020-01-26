@@ -109,17 +109,24 @@
     </header>
     <!-- <span id="navbtn"><i class="fas fa-bars"></i></span> -->
     <main>
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+
+        <!-- FLASH MESSAGES -->
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mt-3">
+                    {{ message }}
+                </div>
+                {% endfor%}
+            {% endif%}
         </div>
-        {% endfor%}
-        {% endif%}
 
         {% block content %}
         {% endblock content %}
+    
     </main>
+
+    <!-- STICKY FOOTER -->
     <Footer class="bg-purple text-light mt-4">
         <div class="container">
             <p>About</p>
@@ -127,7 +134,11 @@
             <p>Etc.</p>
         </div>
     </Footer>
+
+    <!-- DARK OVERLAY FOR MOBILE SIDENAV -->
     <div class="overlay"></div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>

@@ -21,7 +21,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username']
+        fields = ['username', 'first_name', 'last_name']
 
 
     def save(self, commit=True):
@@ -34,4 +34,4 @@ class ProfileUpdateForm(forms.ModelForm):
     image = forms.ImageField()
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'company_name', 'address', 'postcode', 'city', 'image', 'rtgs_nr']
+        fields = ['company_name', 'address', 'postcode', 'city', 'image', 'rtgs_nr']
