@@ -17,6 +17,10 @@ main {
 
 /* COLORS */
 
+.bg-white-faded {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .bg-purple {
     background-color: #636DC3;
     color: #ffffff;
@@ -169,7 +173,7 @@ nav img {
 /* USERS */
 .userlist-img {
     border-radius: 50%;
-    height: 25px;
+    height: 40px;
 }
 
 .clickable-row:hover {

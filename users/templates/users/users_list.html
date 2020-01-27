@@ -17,7 +17,7 @@
 {% if users %}
 <!-- POPULATE THE LIST WITH ALL THE USERS OR THE SEARCH RESULTS -->
 <div class="table-responsive-md mt-3">
-    <table class="table table-striped w-auto m-auto shadow-lg">
+    <table class="table bg-light table-striped w-auto m-auto shadow-lg">
         <thead>
             <tr class="bg-purple text-white">
                 <th scope="col"></th>
@@ -31,7 +31,7 @@
         <tbody>
             {% for user in users %}
             <tr class="clickable-row" data-href="{% url 'user-detail' id=user.id %}">
-                <th scope="row"><img src="{{ user.profile.image.url }}" alt="avatar" class="userlist-img"></th>
+                <th class="p-1" scope="row"><img src="{{ user.profile.image.url }}" alt="avatar" class="userlist-img"></th>
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
                 <td>{{ user.username }}</td>

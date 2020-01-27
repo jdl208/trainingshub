@@ -28,6 +28,12 @@ def logout(request):
 
 
 @login_required
+def account(request):
+    user = request.user
+    return render(request, 'users/user_detail.html', {'user': user})
+
+
+@login_required
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -36,7 +42,7 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, 'Your account has been updated!')
-            return redirect('profile')
+            return redirect('account')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)

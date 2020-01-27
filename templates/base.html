@@ -25,7 +25,7 @@
         <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
         <nav id="mySidenav" class="sidenav">
             <ul class="navbar-nav ml-3">
-                {% if user.is_staff %}
+                {% if request.user.is_staff %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,7 +42,7 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    <a class="nav-link" href="{% url 'account' %}">Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -59,7 +59,7 @@
         </nav>
 
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg bg-white-faded navbar-light">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="/media/img/logo_trainingshub.svg" class="d-inline-block align-top mr-3" alt="logo">
                 <span class="text-purple">DE TRAININGSHUB</span>
@@ -70,7 +70,7 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    {% if user.is_staff %}
+                    {% if request.user.is_staff %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,7 +89,7 @@
 
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-link" href="{% url 'account' %}">Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>

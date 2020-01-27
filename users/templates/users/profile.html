@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mt-3">
     <div class="row">
-        <div class="col-12 border rounded p-3 px-3">
+        <div class="col-12 bg-white shadow-lg border rounded p-3 px-3">
 
             <div class="row">
                 <form class="col-12" action="" method="POST" enctype="multipart/form-data">
@@ -13,7 +13,7 @@
                             <legend class="col-12 border-bottom col-12 mb-4">Profile Info</legend>
                         </div>
                         <div class="row">
-                            <img class="account-image col-md-4" src="{{ user.profile.image.url }}" alt="Card image cap">
+                            <img class="account-image rounded-circle col-md-4" src="{{ user.profile.image.url }}" alt="Card image cap">
                             <div class="col-md-8 pt-2">
                                 {{ p_form.image }}
                             </div>
