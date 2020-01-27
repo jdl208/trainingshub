@@ -64,7 +64,7 @@ def userlist(request):
 @user_passes_test(is_staff, login_url='home')
 def user_detail(request, id):
     user = User.objects.get(pk=id)
-    return render(request, 'users/user-detail.html', {'user':user})
+    return render(request, 'users/user_detail.html', {'user':user})
     
 
 def user_search(request):
