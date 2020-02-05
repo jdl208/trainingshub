@@ -2,8 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-4">
-    <form action="">
+    <p>{{ course.name }}</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="course" id="id_course" value="{{ course }}">
         {{ s_form | crispy }}
+
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Register
@@ -26,17 +30,16 @@
                             transaction.
                         </p>
                         <p>
-                            If you want to pay by invoice an additonial administration fee of € 25,- will be charged.
+                            If you want to pay by invoice an additional administration fee of € 25,- will be charged.
                         </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Pay and confirm</button>
-                        <button type="button" class="btn btn-primary">Confirm registration</button>
+                        <button name="confirm" type="button" class="btn btn-primary">Confirm registration</button>
+                        <button name="pay" type="button" class="btn btn-success">Confirm and pay</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 {% endblock content %}

@@ -16,4 +16,4 @@ class MakePaymentForm(forms.Form):
 class SignupForm(forms.ModelForm):
     class Meta:
         model = Signup
-        fields = ('full_name', 'country', 'postcode', 'city', 'street_address', 'notes')
+        fields = ('full_name', 'company_name', 'street_address', 'postcode', 'city', 'additional_information')

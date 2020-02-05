@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import Signup, Order
+from .models import Signup
 
 
-class OrderAdminInline(admin.TabularInline):
-    model = Order
+# class OrderAdminInline(admin.TabularInline):
+#     model = Order
 
 
-class OrderAdmin(admin.ModelAdmin):
-    inlines = (OrderAdminInline, )
+# class OrderAdmin(admin.ModelAdmin):
+#     inlines = (OrderAdminInline, )
 
 
 admin.site.register(Signup)
-admin.site.register(Order)
+# admin.site.register(Order)
