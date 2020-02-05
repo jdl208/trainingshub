@@ -1,4 +1,42 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-{{ s_form }}
+<div class="container mt-4">
+    <form action="">
+        {{ s_form | crispy }}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Register
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Advance payment?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            You can choose to pay for the course now, or you can pay on the day of the course via a pin
+                            transaction.
+                        </p>
+                        <p>
+                            If you want to pay by invoice an additonial administration fee of € 25,- will be charged.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success">Pay and confirm</button>
+                        <button type="button" class="btn btn-primary">Confirm registration</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
 {% endblock content %}
