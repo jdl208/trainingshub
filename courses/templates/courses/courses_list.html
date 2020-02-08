@@ -4,8 +4,6 @@
 <div class="container">
     {% for course in object_list %}
     <!-- COURSE CARDLIST -->
-
-    <!-- <a class="text-dark course_link" href="{% url 'course-detail' pk=course.id %}"> -->
         <div class="card mt-3 mb-3 shadow">
             <div class="card-header bg-purple text-light">
                 <i class="far fa-calendar-alt"></i> {{ course.date }}
@@ -17,7 +15,12 @@
                             <h5 class="card-title">{{ course.name }}</h5>
                             <p class="card-text m-2">{{ course.description|linebreaks|truncatewords:50 }}</p>
                             <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}">More info</a>
-                            <a class="btn btn-sm btn-outline-success" href="#">Sign up</a>
+                            {% for i in signedup %}
+                                {% if course == i.course %}
+                                    <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' pk=course.id %}">Signed up</a>
+                                {% endif %}
+                            {% endfor %}
+                            <a class="btn btn-sm btn-outline-success" href="{% url 'signup' pk=course.id %}">Sign up</a>
                             {% if user.is_staff %}
                             <a class="btn btn-sm btn-outline-secondary" href="{% url 'course-update' pk=course.id %}">Edit course</a>
                             {% endif %}

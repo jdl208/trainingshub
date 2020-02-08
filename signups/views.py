@@ -3,6 +3,8 @@ from django.contrib import messages
 from courses.models import Courses
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
+from .models import Signup
+
 
 @login_required
 def signup(request, pk):
@@ -14,11 +16,15 @@ def signup(request, pk):
             messages.success(request, f'You have successfully registerd for the course {course.name}!')
             return redirect('account')
     else:
-        data = {'full_name': f'{request.user.first_name} {request.user.last_name}',
-                'postcode': request.user.profile.postcode,
-                'city': request.user.profile.city,
-                'street_address': request.user.profile.address
+        data = {'course': course.id,
+                'registrant': f'{request.user.id}',
                 }
+        if Signup.objects.filter(course=course).filter(registrant=request.user):
+            messages.info(request, f'Already signed up for this course!')
+            signedup = True
+        else:
+            signedup = False
         signup_form = SignupForm(initial=data)
     return render(request, 'signups/signup.html', {'course': course,
-                                                   's_form': signup_form})
+                                                   's_form': signup_form,
+                                                   'signedup': signedup})

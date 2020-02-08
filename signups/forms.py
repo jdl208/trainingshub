@@ -16,4 +16,6 @@ class MakePaymentForm(forms.Form):
 class SignupForm(forms.ModelForm):
     class Meta:
         model = Signup
-        fields = ('full_name', 'company_name', 'street_address', 'postcode', 'city', 'additional_information')
+        fields = ('course', 'registrant', 'additional_information')
+        widgets = {'course': forms.HiddenInput(),
+                   'registrant': forms.HiddenInput()}

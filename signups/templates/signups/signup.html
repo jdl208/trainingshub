@@ -1,45 +1,20 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container mt-4">
-    <p>{{ course.name }}</p>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="course" id="id_course" value="{{ course }}">
-        {{ s_form | crispy }}
+    <div class="container mt-4">
+        <p>{{ course.id }} - {{ course.name }} - {{ course }}</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ s_form | crispy }}
+            {% if signedup %}
+                <button name="confirm" disabled type="submit" class="btn btn-primary"><i class="fas fa-pen-nib mr-2"></i>Confirm registration</button>
+                <button name="pay" disabled type="submit" class="btn btn-success"><i class="fas fa-money-bill mr-2"></i>Confirm and pay</button>
+            {% else %}
+                <button name="confirm" type="submit" class="btn btn-primary"><i class="fas fa-pen-nib mr-2"></i>Confirm registration</button>
+                <button name="pay" type="submit" class="btn btn-success"><i class="fas fa-money-bill mr-2"></i>Confirm and pay</button>
+            {% endif%}
+        </form>
+        <p>{{ signups }}</p>
+    </div>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Register
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Advance payment?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            You can choose to pay for the course now, or you can pay on the day of the course via a pin
-                            transaction.
-                        </p>
-                        <p>
-                            If you want to pay by invoice an additional administration fee of € 25,- will be charged.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button name="confirm" type="button" class="btn btn-primary">Confirm registration</button>
-                        <button name="pay" type="button" class="btn btn-success">Confirm and pay</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 {% endblock content %}

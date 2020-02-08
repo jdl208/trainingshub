@@ -3,11 +3,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Courses
+from signups.models import Signup
 from .forms import NewCourseForm
 
 
 class CourseListView(ListView):
     model = Courses
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseListView, self).get_context_data(**kwargs)  # get the default context data
+        context['signedup'] = Signup.objects.filter(registrant=self.request.user)  # add extra field to the context
+        return context
 
 
 class CourseDetailView(DetailView):
@@ -18,6 +24,7 @@ class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     """
     Tests if a user is a staffmember so they can CRUD courses
     """
+
     def test_func(self):
         if self.request.user.is_staff:
             return True
@@ -31,7 +38,7 @@ class CourseCreateView(StaffRequiredMixin, CreateView):
     model = Courses
     form_class = NewCourseForm
 
-    
+
 class CourseUpdateView(StaffRequiredMixin, UpdateView):
     """
     If user is staf, she can update the course
