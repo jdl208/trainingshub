@@ -6,7 +6,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     font-family: 'Catamaran', sans-serif;
-    background-image: url('/media/img/bg.jpg');
+    background-image: url('/static/img/bg.jpg');
     background-repeat: repeat;
     background-attachment: fixed;
 }
