@@ -1,0 +1,84 @@
+<!-- SIDE NAVIGATION MENU MOBILE VIEW-->
+<nav id="mySidenav" class="sidenav">
+    <ul class="navbar-nav ml-3">
+        {% if request.user.is_staff %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown2">
+                <a class="dropdown-item" href="{% url 'course-create'%}">New course</a>
+                <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
+            </div>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account' %}">Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white-faded navbar-light">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="/static/img/logo_trainingshub.svg" class="d-inline-block align-top mr-3" alt="logo">
+        <span class="text-purple">DE TRAININGSHUB</span>
+    </a>
+    <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
+        <span id="navbtn"><i class="fas fa-bars"></i></span>
+    </button>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            {% if request.user.is_staff %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'course-create'%}">New course</a>
+                    <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
+                </div>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+            </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account' %}">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+
+            {% endif %}
+        </ul>
+    </div>
+</nav>

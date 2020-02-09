@@ -1,148 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    {% if title %}
-    <title>{{ title }} - De Trainingshub</title>
-    {% else %}
-    <title>De Trainingshub</title>
-    {% endif %}
-    <style>
-
-    </style>
-</head>
-
-<body>
-    <header>
-        <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
-        <nav id="mySidenav" class="sidenav">
-            <ul class="navbar-nav ml-3">
-                {% if request.user.is_staff %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin
-                    </a>
-                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown2">
-                        <a class="dropdown-item" href="{% url 'course-create'%}">New course</a>
-                        <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
-                    </div>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account' %}">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-
-        <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg bg-white-faded navbar-light">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="/static/img/logo_trainingshub.svg" class="d-inline-block align-top mr-3" alt="logo">
-                <span class="text-purple">DE TRAININGSHUB</span>
-            </a>
-            <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
-                <span id="navbtn"><i class="fas fa-bars"></i></span>
-            </button>
-
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    {% if request.user.is_staff %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Admin
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'course-create'%}">New course</a>
-                            <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
-                        </div>
-                    </li>
-                    {% endif %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
-                    </li>
-
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account' %}">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- <span id="navbtn"><i class="fas fa-bars"></i></span> -->
-    <main>
-
-        <!-- FLASH MESSAGES -->
-        <div class="container">
-            {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} mt-3">
-                    {{ message }}
-                </div>
-                {% endfor%}
-            {% endif%}
-        </div>
-
-        {% block content %}
-        {% endblock content %}
-
-    </main>
-
-    <!-- STICKY FOOTER -->
-    <Footer class="bg-purple text-light mt-4">
-        <div class="container">
-            <p>About</p>
-            <p>Pricing</p>
-            <p>Etc.</p>
-        </div>
-    </Footer>
-
-    <!-- DARK OVERLAY FOR MOBILE SIDENAV -->
-    <div class="overlay"></div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        {% if title %}
+            <title>{{ title }} - De Trainingshub</title>
+        {% else %}
+            <title>De Trainingshub</title>
+        {% endif %}
+        <style>
+        </style>
+    </head>
+    <body>
+        <header>
+            {% include 'partials/navbar.html' %}
+        </header>
+        <main>
+            {% include 'partials/messages.html' %}
+            {% block content %}
+            {% endblock content %}
+        </main>
+        {% include 'partials/footer.html' %}
+        <!-- DARK OVERLAY FOR MOBILE SIDENAV -->
+        <div class="overlay"></div>
+        <!-- BOOTSTRAP -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!-- CUSTOM JAVASCRIPT -->
+        <script src="{% static 'js/custom.js' %}"></script>
+    </body>
 </html>
