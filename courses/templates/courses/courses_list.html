@@ -13,17 +13,21 @@
                     <div class="col-md-9">
                         <div class="pt-3 pb-1 px-3">
                             <h5 class="card-title">{{ course.name }}</h5>
-                            <p class="card-text m-2">{{ course.description|linebreaks|truncatewords:50 }}</p>
-                            <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}">More info</a>
-                            {% for i in signedup %}
-                                {% if course == i.course %}
-                                    <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' pk=course.id %}">Signed up</a>
-                                {% endif %}
-                            {% endfor %}
-                            <a class="btn btn-sm btn-outline-success" href="{% url 'signup' pk=course.id %}">Sign up</a>
+                            <p class="card-text m-2">{{ course.description | linebreaks | truncatewords:50 }}</p>
+
+                            <!-- BUTTON FOR EDITING COURSE FOR STAFF MEMBERS -->
                             {% if user.is_staff %}
-                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'course-update' pk=course.id %}">Edit course</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'course-update' pk=course.id %}"><i class="fas fa-edit mr-2"></i>Edit course</a>
                             {% endif %}
+
+                            <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}"><i class="fas fa-info-circle mr-2"></i>More info</a>
+                                {% if course.id in signedup %}
+                                    <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' pk=course.id %}"><i class="fas fa-check-double mr-2"></i>Signed up</a>
+                                {% else %}
+                                    <a class="btn btn-sm btn-outline-success" href="{% url 'signup' pk=course.id %}"><i class="fas fa-user-plus mr-2"></i>Sign up</a>
+                                {% endif %}
+
+
                             <div class="mt-2 mb-0">
                                 <small class="text-muted">
                                     <!-- Costs for the course -->

@@ -12,7 +12,7 @@ class CourseListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CourseListView, self).get_context_data(**kwargs)  # get the default context data
-        context['signedup'] = Signup.objects.filter(registrant=self.request.user)  # add extra field to the context
+        context['signedup'] = Signup.objects.filter(registrant=self.request.user).values_list('course_id', flat=True)  # add signed up courses of user to context
         return context
 
 
