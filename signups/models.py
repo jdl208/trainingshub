@@ -9,6 +9,7 @@ class Signup(models.Model):
     registrant = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     additional_information = models.TextField(blank=True)
     date = models.DateTimeField(default=datetime.now)
+    paid = models.BooleanField(default=False)
     cancelled = models.DateField(blank=True, null=True)
 
     def __str__(self):
