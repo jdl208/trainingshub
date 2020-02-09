@@ -21,13 +21,16 @@
                             {% endif %}
 
                             <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}"><i class="fas fa-info-circle mr-2"></i>More info</a>
+
+                            <!-- BUTTON FOR SIGNUP, IF ALREADY SIGNED UP A DISABLED BUTTON IS SHOWN -->
                                 {% if course.id in signedup %}
-                                    <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' pk=course.id %}"><i class="fas fa-check-double mr-2"></i>Signed up</a>
+                                    <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' id=course.id %}"><i class="fas fa-check-double mr-2"></i>Signed up</a>
                                 {% else %}
-                                    <a class="btn btn-sm btn-outline-success" href="{% url 'signup' pk=course.id %}"><i class="fas fa-user-plus mr-2"></i>Sign up</a>
+                                    <a class="btn btn-sm btn-outline-success" href="{% url 'signup' id=course.id %}"><i class="fas fa-user-plus mr-2"></i>Sign up</a>
                                 {% endif %}
 
 
+                            <!-- EXTRA INFO ABOUT THE COURSE -->
                             <div class="mt-2 mb-0">
                                 <small class="text-muted">
                                     <!-- Costs for the course -->
