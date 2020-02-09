@@ -5,7 +5,7 @@ This web app is for a school for Sign language interpreters.
 
 ## UX
 * As a user, I want to see new courses quickly when I open the page.
-* As a user, 
+* As a user, I want to see for which courses I subscribed.
 
 ## Features
 ### Existing features
