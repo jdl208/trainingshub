@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Catamaran:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Catamaran:400,700&display=swap");
 
 /* STICKY FOOTER */
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    font-family: 'Catamaran', sans-serif;
-    background-image: url('/static/img/bg.jpg');
+    font-family: "Catamaran", sans-serif;
+    background-image: url("/static/img/bg.jpg");
     background-repeat: repeat;
     background-attachment: fixed;
 }
@@ -22,25 +22,25 @@ main {
 }
 
 .bg-purple {
-    background-color: #636DC3;
+    background-color: #636dc3;
     color: #ffffff;
 }
 
 .text-purple {
-    color: #636DC3;
+    color: #636dc3;
 }
 
 .btn-outline-purple {
-    border: 1px solid #636DC3;
-    color: #636DC3;
+    border: 1px solid #636dc3;
+    color: #636dc3;
 }
-.btn-outline-purple:hover{
-    background-color: #636DC3;
+.btn-outline-purple:hover {
+    background-color: #636dc3;
     color: #ffffff;
 }
 
 .border-purple {
-    border: 1px solid #636DC3;
+    border: 1px solid #636dc3;
 }
 
 /* NAVBAR */
@@ -62,7 +62,7 @@ nav img {
     z-index: 9999;
     top: 0;
     right: 0;
-    background-color: #636DC3;
+    background-color: #636dc3;
     overflow-x: hidden;
     padding-top: 60px;
     transition: all 0.5s ease-in-out;

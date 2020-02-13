@@ -17,4 +17,4 @@ class Signup(models.Model):
     cancelled = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return f'{self.id}-{self.registrant}-{self.course}'
+        return f"{self.id}-{self.registrant}-{self.course}"
