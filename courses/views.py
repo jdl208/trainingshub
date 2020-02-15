@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     CreateView,
@@ -8,9 +7,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-
 from signups.models import Signup
-
 from .forms import NewCourseForm
 from .models import Courses
 
