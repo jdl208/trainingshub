@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+{% block content %}
+<div class="container mt-4">
+    <form action="" method="POST" id="payment-form">
+        {% csrf_token %}
+        <div id="credit-card-errors" style="display: none;">
+            <div class="alert-message block-message error" id="stripe-error-message"></div>
+        </div>
+        <div class="d-none">{{ s_form }}</div>
+        <div class="card mt-4 shadow">
+            <div class="card-header bg-purple">
+                Payment Information
+            </div>
+            <div class="card-body">
+                {{ p_form | crispy}}
+                <button type="submit" class="btn btn-outline-purple shadow">
+                    <i class=" fas fa-money-bill mr-2"></i>Confirm payment
+                </button>
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+{% block stripe_js %}
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    Stripe.publishableKey = '{{ publishable }}';
+    //]]>
+</script>
+<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
+{% endblock stripe_js %}

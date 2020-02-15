@@ -3,89 +3,46 @@
 {% load static from staticfiles %}
 {% block content %}
 <div class="container mt-4">
-    <form action="" method="POST" id="payment-form">
+    <form action="" method="POST">
 
         {% csrf_token %}
-        <div id="credit-card-errors" style="display: none;">
-            <div id="alert-message block-message error" id="stripe-error-message"></div>
-        </div>
-
-        <div class="card shadow">
+        <div class="card mt-4 shadow">
             <div class="card-header bg-purple">
-                Course Information
+                Personal Information
             </div>
             <div class="card-body">
+                <!-- COURSE INFO -->
                 <div class="d-flex justify-content-between">
                     <div>
+                        <img src="{{ course.image.url }}" alt="" class="img-fluid rounded w-25">
                         {{ course.name }}
                     </div>
                     <div>
                         € {{ course.costs }}
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card mt-4 shadow">
-            <div class="card-header bg-purple">
-                Personal Information
-            </div>
-            <div class="card-body">
-                <div>{{ request.user.first_name }} {{ request.user.last_name }}</div>
-                <div class="mb-3"><small>RTGS nr:</small> {{ request.user.profile.rtgs_nr }}</div>
-                {{ s_form | crispy }}
-            </div>
-        </div>
-        <div class="mt-3">
-            {% if signedup %}
-            <button name="confirm" disabled type="submit" class="btn btn-secondary shadow">
-                <i class="fas fa-pen-nib mr-2"></i>Confirm registration
-            </button>
-            <button name="pay" disabled type="submit" class="btn btn-secondary shadow">
-                <i class="fas fa-money-bill mr-2"></i>Confirm and pay
-            </button>
-            {% else %}
-            <button name="confirm" type="submit" class="btn btn-primary shadow mr-2">
-                <i class="fas fa-pen-nib mr-2"></i>Confirm registration
-            </button>
-            <button type="button" class="btn btn-success shadow" data-toggle="modal" data-target="#exampleModal">
-                <i class="fas fa-money-bill mr-2"></i>Confirm and pay
-            </button>
-            {% endif%}
-        </div>
-        <!-- Modal with Payment Form-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Payment Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{ payment_form | crispy }}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Close
-                        </button>
-                        <button id="submit_payment_btn" name="pay" type="submit" class="btn btn-success">
-                            <i class="fas fa-money-bill mr-2"></i>Confirm payment
-                        </button>
-                    </div>
+                <div>
+                    <img src="{{ request.user.profile.image.url }}" alt=""
+                        class="img-fluid rounded">{{ request.user.first_name }}
+                    <span>{{ request.user.last_name }}</span><br>
+                    <small>RTGS nr:</small> {{ request.user.profile.rtgs_nr }}
                 </div>
+                <div>Invoice information:</div>
+                {{ s_form | crispy }}
+                <div class="mt-3">
+                    {% if signedup %}
+                    <button name="confirm" disabled type="submit" class="btn btn-secondary shadow">
+                        <i class="fas fa-pen-nib mr-2"></i>Confirm registration
+                    </button>
+                    {% else %}
+                    <button name="confirm" type="submit" class="btn btn-outline-purple shadow mr-2">
+                        <i class="fas fa-pen-nib mr-2"></i>Confirm registration
+                    </button>
+                    {% endif%}
+                </div>
+
             </div>
         </div>
     </form>
 </div>
 {% endblock content %}
-{% block stripe_js %}
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-    //<![CDATA[
-    Stripe.publishableKey = '{{ publishable }}';
-    //]]>
-</script>
-<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
-{% endblock stripe_js %}

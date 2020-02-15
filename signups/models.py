@@ -1,7 +1,14 @@
 from django.db import models
 from courses.models import Courses
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.utils import timezone
+
+
+PAYMENT_METHODS = [
+    ("CC", "Credit card"),
+    ("PIN", "Pin"),
+    ("IN", "Invoice"),
+]
 
 
 class Signup(models.Model):
@@ -12,7 +19,10 @@ class Signup(models.Model):
     postcode = models.CharField(max_length=10, blank=False, null=True)
     city = models.CharField(max_length=100, blank=False, null=True)
     additional_information = models.TextField(blank=True)
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(default=timezone.now)
+    payment_method = models.CharField(
+        max_length=100, choices=PAYMENT_METHODS, default="CC"
+    )
     paid = models.BooleanField(default=False)
     cancelled = models.DateField(blank=True, null=True)
 

@@ -12,11 +12,10 @@ class Profile(models.Model):
     postcode = models.CharField(max_length=6)
     city = models.CharField(max_length=40)
     rtgs_nr = models.IntegerField(null=True, blank=True)
-    image = models.ImageField(default='img/default.jpg', upload_to='profile_pics')
-
+    image = models.ImageField(default="default.jpg", upload_to="profile_pics")
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f"{self.user.username} Profile"
 
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)

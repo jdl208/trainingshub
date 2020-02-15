@@ -16,8 +16,14 @@ stripe.api_key = settings.STRIPE_SECRET
 def signup(request, id):
     course = Courses.objects.get(pk=id)
 
+    # Go to paymentform before confirming registration
+    if request.method == "POST" and request.POST["payment_method"] == "CC":
+        s_form = SignupForm(request.POST)
+        s_form = s_form.save()
+        return redirect("checkout", id=s_form.id)
+
     # signup for course without paying
-    if request.method == "POST" and "confirm" in request.POST:
+    elif request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
@@ -26,42 +32,14 @@ def signup(request, id):
             )
             return redirect("account")
 
-    # signup for course and pay via payment provider
-    elif request.method == "POST" and "pay" in request.POST:
-        signup_form = SignupForm(request.POST)
-        payment_form = MakePaymentForm(request.POST)
-
-        if signup_form.is_valid() and payment_form.is_valid():
-            try:
-                customer = stripe.Charge.create(
-                    amount=int(course.costs * 100),
-                    currency="EUR",
-                    description=request.user.username,
-                    card=payment_form.cleaned_data["stripe_id"],
-                )
-                messages.info(request, "I tried!")
-            except stripe.error.CardError:
-                messages.error(request, "Your card was declined!")
-
-            if customer.paid:
-                signup = signup_form.save(commit=False)
-                signup.paid = True
-                signup.save()
-                messages.success(request, "You have succesfully paid!")
-                return redirect(reverse("courses"))
-
-            else:
-                messages.error(request, "Unable to take payment")
-        else:
-            print(payment_form.errors)
-            messages.error(request, "We were unable to take a payment with that card!")
-
-    # Generate the signup form with prefilled fields
+    # Check if user already registerd for the course
     if Signup.objects.filter(course=course).filter(registrant=request.user):
         messages.info(request, f"Already signed up for this course!")
         signedup = True
     else:
         signedup = False
+
+    # Generate the signup form with prefilled fields
     signup_form = SignupForm(
         initial={
             "course": course.id,
@@ -71,15 +49,47 @@ def signup(request, id):
             "city": f"{request.user.profile.city}",
         }
     )
-    payment_form = MakePaymentForm()
     return render(
         request,
         "signups/signup.html",
-        {
-            "course": course,
-            "s_form": signup_form,
-            "signedup": signedup,
-            "payment_form": payment_form,
-            "publishable": settings.STRIPE_PUBLISHABLE,
-        },
+        {"course": course, "s_form": signup_form, "signedup": signedup,},
     )
+
+
+@login_required
+def checkout(request, id):
+    signup = Signup.objects.get(pk=id)
+    course = Courses.objects.get(id=signup.course_id)
+    # signup for course and pay via payment provider
+    if request.method == "POST":
+        payment_form = MakePaymentForm(request.POST)
+
+        if payment_form.is_valid():
+            try:
+                customer = stripe.Charge.create(
+                    amount=int(course.costs * 100),
+                    currency="EUR",
+                    description=request.user.username,
+                    card=payment_form.cleaned_data["stripe_id"],
+                )
+                if customer.paid:
+                    messages.success(request, "You have succesfully paid!")
+                    signup.paid = True
+                    signup.save()
+                    return redirect(reverse("course-list"))
+
+                else:
+                    messages.error(request, "Unable to take payment")
+
+            except stripe.error.CardError:
+                messages.error(request, "Your card was declined!")
+
+        else:
+            print(payment_form.errors)
+            messages.error(request, "We were unable to take a payment with that card!")
+    context = {
+        "signup": signup,
+        "p_form": MakePaymentForm(),
+        "publishable": settings.STRIPE_PUBLISHABLE,
+    }
+    return render(request, "signups/checkout.html", context)
