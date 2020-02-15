@@ -32,6 +32,7 @@ main {
 
 .btn-outline-purple {
     border: 1px solid #636dc3;
+    background-color: #ffffff;
     color: #636dc3;
 }
 .btn-outline-purple:hover {
