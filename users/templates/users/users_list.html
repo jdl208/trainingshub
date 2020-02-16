@@ -31,7 +31,9 @@
         <tbody>
             {% for user in users %}
             <tr class="clickable-row" data-href="{% url 'user-detail' id=user.id %}">
-                <th class="p-1" scope="row"><img src="{{ user.profile.image.url }}" alt="avatar" class="userlist-img"></th>
+                <th class="p-1" scope="row"><img src="{{ user.profile.image.url }}" alt="avatar"
+                        class="small-img rounded-circle">
+                </th>
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
                 <td>{{ user.username }}</td>
@@ -47,10 +49,10 @@
     <ul class="pagination text-purple justify-content-center">
         {% if users.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page=1" tabindex="-2"><<<</a>
+            <a class="page-link" href="?page=1" tabindex="-2">first</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1"><</a>
+            <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">previous</a>
         </li>
         {% endif %}
         <li class="page-item">
@@ -58,10 +60,10 @@
         </li>
         {% if users.has_next %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ users.next_page_number }}">></a>
+            <a class="page-link" href="?page={{ users.next_page_number }}">next</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page={{ users.paginator.num_pages }}">>>></a>
+            <a class="page-link" href="?page={{ users.paginator.num_pages }}">last</a>
         </li>
         {% endif%}
     </ul>
@@ -70,7 +72,7 @@
 {% else %}
 <!-- IMAGE WHEN THERE ARE NOG RESULTS FOR THE QUERY -->
 <div class="text-center">
-    <img src="/media/img/no_results_found.png" alt="No results found" class="img-fluid">
+    <img src="/static/img/no_results_found.png" alt="No results found" class="img-fluid shadow rounded">
 </div>
 {% endif %}
 {% endblock content %}

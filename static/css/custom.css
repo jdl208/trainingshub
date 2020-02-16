@@ -172,13 +172,19 @@ nav img {
 }
 
 /* USERS */
-.userlist-img {
-    border-radius: 50%;
-    height: 40px;
+.small-img {
+    width: 40px;
+    max-height: 40px;
 }
 
 .clickable-row:hover {
     cursor: pointer;
+}
+
+/* Set table column to minimal width */
+th.min,
+td.min {
+    width: 1%;
 }
 
 /* COURSES */

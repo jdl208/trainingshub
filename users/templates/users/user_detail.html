@@ -22,14 +22,86 @@
             {% endif %}
         </div>
         <div class="col">
-            <h3>Upcoming:</h3>
-            {% for i in upcoming %}
-            <p>{{i.course.name}}</p>
-            {% endfor%}
-            <h3>Past courses:</h3>
-            {% for p in past %}
-            <p>{{p.course.name}}</p>
-            {% endfor%}
+            <div class="card shadow">
+                <div class="card-header bg-purple">
+                    <ul id="course-nav" class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a id="upcoming" class="nav-link active" href="">Upcoming courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="past" class="nav-link text-white" href="">Finished courses</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <!-- UPCOMING COURSES -->
+                    <div id="upcoming-courses">
+                        <div class="table-responsive-md mt-3">
+                            <table class="table bg-light">
+                                <tbody>
+                                    {% for i in upcoming %}
+                                    <tr>
+                                        <th class="min align-middle" scope="row">
+                                            <img src="{{ i.course.image.url }}" alt="avatar"
+                                                class="small-img rounded-circle">
+                                        </th>
+                                        <td>{{i.course.name}}<br><small>{{ i.course.date }}</small></td>
+                                        <td class="text-right align-middle">
+                                            <a title="More info" href="{% url 'course-detail' pk=i.course.id %}">
+                                                <i class="fas fa-info-circle btn btn-outline-purple"></i>
+                                            </a>
+                                            {% if i.paid %}
+                                            <a title="Pay for course € {{i.course.costs}}" href="">
+                                                <i class="fas fa-euro-sign btn btn-secondary disabled"></i>
+                                            </a>
+                                            {% else %}
+                                            <a title="Pay for course € {{i.course.costs}}"
+                                                href="{% url 'checkout' id=i.id %}">
+                                                <i class="fas fa-euro-sign btn btn-info"></i>
+                                            </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- PAST COURSES -->
+                    <div id="past-courses" class="d-none">
+                        <div class="table-responsive-md mt-3">
+                            <table class="table bg-light">
+                                <tbody>
+                                    {% for i in past %}
+                                    <tr>
+                                        <th class="min align-middle" scope="row">
+                                            <img src="{{ i.course.image.url }}" alt="avatar"
+                                                class="small-img rounded-circle">
+                                        </th>
+                                        <td>{{i.course.name}}<br><small>{{ i.course.date }}</small></td>
+                                        <td class="text-right align-middle">
+                                            <a href="{% url 'course-detail' pk=i.course.id %}"><i
+                                                    class="fas fa-info-circle btn btn-outline-purple"></i></a>
+                                            {% if i.paid %}
+                                            <span title="Payment has been fulfilled">
+                                                <i class="fas fa-euro-sign btn btn-secondary"></i>
+                                            </span>
+                                            {% else %}
+                                            <a title="Pay for course € {{i.course.costs}}"
+                                                href="{% url 'checkout' id=i.id %}">
+                                                <i class="fas fa-euro-sign btn btn-info"></i>
+                                            </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
