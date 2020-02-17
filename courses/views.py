@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     CreateView,
@@ -14,9 +14,7 @@ from .models import Courses
 
 class CourseListView(ListView):
     model = Courses
-    start_date = datetime.today()
-    end_date = start_date + timedelta(days=1095)
-    queryset = Courses.objects.filter(date__range=(start_date, end_date))
+    queryset = Courses.objects.filter(date__gte=datetime.today())
     ordering = ["date"]
 
     def get_context_data(self, **kwargs):

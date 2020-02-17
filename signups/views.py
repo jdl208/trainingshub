@@ -1,6 +1,8 @@
+from datetime import datetime
+
 import stripe
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect, render, reverse
 
 from courses.models import Courses
@@ -52,7 +54,7 @@ def signup(request, id):
     return render(
         request,
         "signups/signup.html",
-        {"course": course, "s_form": signup_form, "signedup": signedup,},
+        {"course": course, "s_form": signup_form, "signedup": signedup},
     )
 
 
@@ -93,3 +95,19 @@ def checkout(request, id):
         "publishable": settings.STRIPE_PUBLISHABLE,
     }
     return render(request, "signups/checkout.html", context)
+
+
+def is_staff(user):
+    """
+    Test if user is staff so they can get acces to certain areas of the app.
+    """
+    return user.is_staff
+
+
+@user_passes_test(is_staff, login_url="home")
+def signup_list(request):
+    context = {
+        "courses": Courses.objects.filter(date__gte=datetime.today()),
+        "courses_complete": Courses.objects.filter(date__lt=datetime.today()),
+    }
+    return render(request, "signups/course-signup-list.html", context)

@@ -40,7 +40,7 @@ def account(request):
             registrant=request.user, course__date__gte=datetime.today()
         ),
         "past": Signup.objects.filter(
-            registrant=request.user, course__date__lte=datetime.today()
+            registrant=request.user, course__date__lt=datetime.today()
         ),
         "user": request.user,
     }
