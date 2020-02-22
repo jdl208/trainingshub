@@ -37,7 +37,7 @@ class Courses(models.Model):
     ends = models.DateField()
     endtime = models.TimeField()
     costs = models.DecimalField(decimal_places=2, max_digits=7)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.PROTECT)
     places = models.IntegerField(default=0)
     description = models.TextField(null=True)
     image = models.ImageField(
