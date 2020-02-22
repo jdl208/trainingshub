@@ -1,5 +1,5 @@
 from django import forms
-from .models import Courses, Course_type
+from .models import Courses, Course_type, Location
 
 
 class DateInput(forms.DateInput):
@@ -31,4 +31,24 @@ class NewCourseTypeForm(forms.ModelForm):
 
 
 class NewLocationForm(forms.ModelForm):
-    pass
+    class Meta:
+        model = Location
+        fields = "__all__"
+        labels = {
+            "name": False,
+            "street_address": False,
+            "postcode": False,
+            "city": False,
+            "tel": False,
+            "google_maps": False,
+        }
+        widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "Location name (required)"}),
+            "street_address": forms.TextInput(
+                attrs={"placeholder": "Street address (required)"}
+            ),
+            "postcode": forms.TextInput(attrs={"placeholder": "Postcode (required)"}),
+            "city": forms.TextInput(attrs={"placeholder": "Town or city (required)"}),
+            "tel": forms.TextInput(attrs={"placeholder": "Telephone number"}),
+            "google_maps": forms.URLInput(attrs={"placeholder": "URL on google maps"}),
+        }
