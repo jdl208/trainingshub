@@ -1,47 +1,76 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container mt-3 mx-auto border shadow-lg rounded-lg p-0">
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4 p-3 bg-purple text-white">Course information</legend>
-            <div class="px-3">
-                <div class=""">
-                {{ form.name | as_crispy_field }}
-                </div>
-                <div class="row">
-                    <div class="col-md-4">{{ form.course_type | as_crispy_field }}</div>
-                    <div class="col-md-4">{{ form.costs | as_crispy_field }}</div>
-                    <div class="col-md-4">{{ form.places | as_crispy_field }}</div>
-                </div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-light shadow">
+                <div class="card-header bg-purple">
+                    {% if object.id %}
+                    Update {{ object.name }}
+                    {% else %}
+                    Add a location
+                    {% endif %}
 
-                <div class="row">
-                    <div class="col-6 col-md-3">{{ form.ngt | as_crispy_field }}</div>
-                    <div class="col-6 col-md-3">{{ form.schrijftolk | as_crispy_field }}</div>
-                    <div class="col-6 col-md-3">{{ form.asl | as_crispy_field }}</div>
-                    <div class="col-6 col-md-3"> {{ form.combitolk | as_crispy_field }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">{{ form.credit_language_and_interpreting_skills | as_crispy_field }}</div>
-                    <div class="col-md-4">{{ form.credit_attitude | as_crispy_field }}</div>
-                    <div class="col-md-4">{{ form.credit_target_audiences | as_crispy_field }}</div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form | crispy }}
+                            <div class="input-group">
+                                {% if object.id %}
+                                <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save
+                                    changes</button>
+                                {% else %}
+                                <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save</button>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">{{ form.date | as_crispy_field }}</div>
-                    <div class="col-md-3">{{ form.time | as_crispy_field }}</div>
-                    <div class="col-md-3">{{ form.ends | as_crispy_field }}</div>
-                    <div class="col-md-3">{{ form.endtime | as_crispy_field }}</div>
-                </div>
-                {{ form.location | as_crispy_field }}
-                {{ form.description | as_crispy_field }}
-                {{ form.image }}
             </div>
-        </fieldset>
-        <div class="form-group px-3">
-            <button class="btn btn-info" type="submit">Save</button>
         </div>
+        <div class="col-md-6">
+            <div class="card bg-light shadow">
+                <div class="card-header bg-purple">
+                    Locations
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        {% for location in object_list %}
+                        <tr>
+                            <td>{{ location }}</td>
+                            <td class="text-right">
+                                <a href="">
+                                    <i class="fas fa-edit mr-2 text-secondary"></i>
+                                </a>
+                                <a type="button" data-toggle="modal" data-target="#modal{{ location.id }}">
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- MODAL FOR DELETE OPTION -->
+                        <div class="modal" id="modal{{ location.id }}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete: {{ location.name }}?</h5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancel</button>
+                                        <a type="button" class="btn btn-danger" href="">Yes, delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    </form>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
