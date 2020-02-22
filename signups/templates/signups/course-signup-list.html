@@ -2,26 +2,32 @@
 {% load static from staticfiles %}
 {% block content %}
 <div class="container mt-4">
-    <h4>Courses</h4>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover shadow">
-            <thead class="bg-purple">
-                <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Participants</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in courses %}
-                <tr>
-                    <td>{{ i.date }}</td>
-                    <td>{{ i.name }}</td>
-                    <td>{{ i.signup.count }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="card shadow">
+        <div class="card-body">
+            <h4 class="card-title">Course list</h4>
+            <div class="table-responsive">
+                <table class="table bg-white table-striped table-hover">
+                    <thead class="bg-purple">
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Participants</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in courses %}
+                        <tr class="clickable-row" data-href="{% url 'course-detail' pk=i.id %}">
+                            <td>{{ i.date }}</td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.course_type }}</td>
+                            <td>{{ i.signup.count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}
