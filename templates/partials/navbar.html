@@ -11,8 +11,8 @@
             <div class="ml-3">
                 <a class="nav-link" href="{% url 'signuplist' %}">Course list</a>
                 <a class="nav-link" href="{% url 'course-create'%}">Add course</a>
-                <a class="nav-link" href="#">Add course-type</a>
-                <a class="nav-link" href="#">Add location</a>
+                <a class="nav-link" href="{% url 'course-type-create'%}">Add course-type</a>
+                <a class="nav-link" href="{% url 'location-create'%}">Add location</a>
                 <a class="nav-link" href="{% url 'user_list' %}">Users</a>
             </div>
         </li>
@@ -62,8 +62,8 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'signuplist' %}">Course list</a>
                     <a class="dropdown-item" href="{% url 'course-create'%}">Add course</a>
-                    <a class="dropdown-item" href="#">Add course-type</a>
-                    <a class="dropdown-item" href="#">Add location</a>
+                    <a class="dropdown-item" href="{% url 'course-type-create' %}">Add course-type</a>
+                    <a class="dropdown-item" href="{% url 'location-create' %}">Add location</a>
                     <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
                 </div>
             </li>

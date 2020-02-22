@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from PIL import Image
 
+
 class Location(models.Model):
     name = models.CharField(max_length=50)
     street_address = models.CharField(max_length=75)
@@ -11,11 +12,11 @@ class Location(models.Model):
     google_maps = models.URLField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.name} - {self.city}'
+        return f"{self.name} - {self.city}"
 
 
 class Course_type(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
@@ -23,7 +24,7 @@ class Course_type(models.Model):
 
 class Courses(models.Model):
     name = models.CharField(max_length=150)
-    course_type = models.ForeignKey(Course_type, on_delete=models.CASCADE, null=True)
+    course_type = models.ForeignKey(Course_type, on_delete=models.PROTECT, null=False)
     ngt = models.BooleanField(default=False)
     schrijftolk = models.BooleanField(default=False)
     asl = models.BooleanField(default=False)
@@ -39,14 +40,16 @@ class Courses(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     places = models.IntegerField(default=0)
     description = models.TextField(null=True)
-    image = models.ImageField(default='img/logo_trainingshub.png', upload_to='course_pics')
+    image = models.ImageField(
+        default="img/logo_trainingshub.png", upload_to="course_pics"
+    )
 
     def __str__(self):
-        return f'{self.date} - {self.name}'
+        return f"{self.date} - {self.name}"
 
     def get_absolute_url(self):
-        return reverse('course-detail', kwargs={'pk': self.pk})
-    
+        return reverse("course-detail", kwargs={"pk": self.pk})
+
     def save(self, *args, **kwargs):
         super(Courses, self).save(*args, **kwargs)
         # Resize uploaded image
@@ -55,4 +58,3 @@ class Courses(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-            

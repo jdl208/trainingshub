@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-light shadow">
+                <div class="card-header bg-purple">
+                    {% if object.id %}
+                    Update {{ object.name }}
+                    {% else %}
+                    Add a type of course
+                    {% endif %}
+
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form | crispy }}
+                            <div class="input-group">
+                                {% if object.id %}
+                                <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save
+                                    changes</button>
+                                {% else %}
+                                <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save</button>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-light shadow">
+                <div class="card-header bg-purple">
+                    Course types
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        {% for type in object_list %}
+                        <tr>
+                            <td>{{ type.name }}</td>
+                            <td class="text-right">
+                                <a href="{% url 'course-type-update' pk=type.id %}">
+                                    <i class="fas fa-edit mr-2 text-secondary"></i>
+                                </a>
+                                <a type="button" data-toggle="modal" data-target="#modal{{ type.id }}">
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- MODAL FOR DELETE OPTION -->
+                        <div class="modal" id="modal{{ type.id }}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete: {{ type.name }}?</h5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancel</button>
+                                        <a type="button" class="btn btn-danger"
+                                            href="{% url 'course-type-delete' id=type.id %}">Yes, delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,11 @@
 from datetime import datetime
+
+from django.shortcuts import redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib import messages
+from django.db.models import ProtectedError
+
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -8,8 +14,9 @@ from django.views.generic import (
     UpdateView,
 )
 from signups.models import Signup
-from .forms import NewCourseForm
-from .models import Courses
+from users.views import is_staff
+from .forms import NewCourseForm, NewCourseTypeForm
+from .models import Courses, Course_type, Location
 
 
 class CourseListView(ListView):
@@ -67,3 +74,58 @@ class CourseDeleteView(StaffRequiredMixin, DeleteView):
 
     model = Courses
     success_url = "/courses/"
+
+
+class CourseTypeCreateView(StaffRequiredMixin, CreateView):
+    """
+    If user is staff the she can create new course types.
+    """
+
+    template_name = "courses/course_type_form.html"
+    model = Course_type
+    form_class = NewCourseTypeForm
+
+    def get_success_url(self):
+        return reverse("course-type-create")
+
+    def get_context_data(self, **kwargs):
+        kwargs["object_list"] = Course_type.objects.order_by("name")
+        return super(CourseTypeCreateView, self).get_context_data(**kwargs)
+
+
+class CourseTypeUpdateView(StaffRequiredMixin, UpdateView):
+    """
+    If user is staff the she can create new course types.
+    """
+
+    template_name = "courses/course_type_form.html"
+    model = Course_type
+    form_class = NewCourseTypeForm
+
+    def get_success_url(self):
+        return reverse("course-type-create")
+
+    def get_context_data(self, **kwargs):
+        kwargs["object_list"] = Course_type.objects.order_by("name")
+        return super(CourseTypeUpdateView, self).get_context_data(**kwargs)
+
+
+@user_passes_test(is_staff, login_url="home")
+def delete_course_type(request, id):
+    try:
+        Course_type.objects.get(pk=id).delete()
+    except ProtectedError:
+        messages.error(
+            request, "That course type is in use. You can't delete it!",
+        )
+    return redirect(reverse("course-type-create"))
+
+
+class LocationCreateView(StaffRequiredMixin, CreateView):
+    """
+    If user is staff the she can create add locations where course will take place.
+    """
+
+    template_name = "courses/location_form.html"
+    model = Location
+    fields = "__all__"
