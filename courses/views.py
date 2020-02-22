@@ -1,11 +1,9 @@
 from datetime import datetime
-
 from django.shortcuts import redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from django.db.models import ProtectedError
-
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -15,7 +13,7 @@ from django.views.generic import (
 )
 from signups.models import Signup
 from users.views import is_staff
-from .forms import NewCourseForm, NewCourseTypeForm
+from .forms import NewCourseForm, NewCourseTypeForm, NewLocationForm
 from .models import Courses, Course_type, Location
 
 
@@ -28,9 +26,7 @@ class CourseListView(ListView):
         # get the default context data
         context = super(CourseListView, self).get_context_data(**kwargs)
         # add signed up courses of user to context
-        context["signedup"] = Signup.objects.filter(
-            registrant=self.request.user
-        ).values_list("course_id", flat=True)
+        context["signedup"] = Signup.objects.filter(registrant=self.request.user).values_list("course_id", flat=True)
         return context
 
 
@@ -95,7 +91,7 @@ class CourseTypeCreateView(StaffRequiredMixin, CreateView):
 
 class CourseTypeUpdateView(StaffRequiredMixin, UpdateView):
     """
-    If user is staff the she can create new course types.
+    If user is staff the she can update course types.
     """
 
     template_name = "courses/course_type_form.html"
@@ -127,5 +123,41 @@ class LocationCreateView(StaffRequiredMixin, CreateView):
     """
 
     template_name = "courses/location_form.html"
+    form_class = NewLocationForm
+
+    def get_success_url(self):
+        return reverse("location-create")
+
+    def get_context_data(self, **kwargs):
+        kwargs["object_list"] = Location.objects.order_by("name")
+        return super(LocationCreateView, self).get_context_data(**kwargs)
+
+
+class LocationUpdateView(StaffRequiredMixin, UpdateView):
+    """
+    Update locations where courses take place.
+    """
+
+    template_name = "courses/location_form.html"
     model = Location
-    fields = "__all__"
+    form_class = NewLocationForm
+
+    def get_success_url(self):
+        return reverse("location-create")
+
+    def get_context_data(self, **kwargs):
+        kwargs["object_list"] = Location.objects.order_by("name")
+        return super(LocationUpdateView, self).get_context_data(**kwargs)
+
+
+@user_passes_test(is_staff, login_url="home")
+def delete_location(request, id):
+    """
+    Staff members can delete Locations.
+    This can only be done when a location is not used in a course.
+    """
+    try:
+        Location.objects.get(pk=id).delete()
+    except ProtectedError:
+        messages.error(request, "That location is used! Unable to delete!")
+    return redirect(reverse("location-create"))

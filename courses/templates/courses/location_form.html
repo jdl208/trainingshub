@@ -23,7 +23,8 @@
                                 <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save
                                     changes</button>
                                 {% else %}
-                                <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save</button>
+                                <button class="btn btn-outline-purple" type="submit" id="save-course-type">Save new
+                                    location</button>
                                 {% endif %}
                             </div>
                         </fieldset>
@@ -42,7 +43,7 @@
                         <tr>
                             <td>{{ location }}</td>
                             <td class="text-right">
-                                <a href="">
+                                <a href="{% url 'location-update' pk=location.id %}">
                                     <i class="fas fa-edit mr-2 text-secondary"></i>
                                 </a>
                                 <a type="button" data-toggle="modal" data-target="#modal{{ location.id }}">
@@ -60,7 +61,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Cancel</button>
-                                        <a type="button" class="btn btn-danger" href="">Yes, delete</a>
+                                        <a type="button" class="btn btn-danger"
+                                            href="{% url 'location-delete' id=location.id %}">Yes, delete</a>
                                     </div>
                                 </div>
                             </div>
