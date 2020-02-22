@@ -2,22 +2,27 @@
 <!-- SIDE NAVIGATION MENU MOBILE VIEW-->
 <nav id="mySidenav" class="sidenav">
     <ul class="navbar-nav ml-3">
+        <!-- DASHBOARD ITEMS FOR STAFF -->
         {% if request.user.is_staff %}
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item border-bottom">
+            <a class="nav-link disabled text-white" href="#">
                 Admin
             </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown2">
-                <a class="dropdown-item" href="{% url 'course-create'%}">New course</a>
-                <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
-                <a class="dropdown-item" href="{% url 'signuplist' %}">Course list</a>
+            <div class="ml-3">
+                <a class="nav-link" href="{% url 'signuplist' %}">Course list</a>
+                <a class="nav-link" href="{% url 'course-create'%}">Add course</a>
+                <a class="nav-link" href="#">Add course-type</a>
+                <a class="nav-link" href="#">Add location</a>
+                <a class="nav-link" href="{% url 'user_list' %}">Users</a>
             </div>
         </li>
         {% endif %}
+
+        <!-- WHAT USERS GET TO SEE IN THE NAVIGATION MENU -->
         <li class="nav-item">
             <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
         </li>
+        <!-- WHEN THEY ARE LOGGED IN -->
         {% if user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'account' %}">Account</a>
@@ -26,6 +31,7 @@
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
         {% else %}
+        <!-- WHEN THEY ARE NOT LOGGED IN -->
         <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
@@ -54,17 +60,19 @@
                     Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'course-create'%}">New course</a>
-                    <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
                     <a class="dropdown-item" href="{% url 'signuplist' %}">Course list</a>
+                    <a class="dropdown-item" href="{% url 'course-create'%}">Add course</a>
+                    <a class="dropdown-item" href="#">Add course-type</a>
+                    <a class="dropdown-item" href="#">Add location</a>
+                    <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
                 </div>
             </li>
             {% endif %}
-
+            <!-- WHAT USERS GET TO SEE IN THE NAVIGATION MENU -->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
             </li>
-
+            <!-- WHEN THEY ARE LOGGED IN -->
             {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'account' %}">Account</a>
@@ -73,6 +81,7 @@
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
             {% else %}
+            <!-- WHEN THEY ARE NOT LOGGED IN -->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Login</a>
             </li>
