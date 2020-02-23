@@ -1,82 +1,98 @@
 {% extends 'base.html' %}
-{% load l10n %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="container">
-    {% for course in object_list %}
+    <div class="card bg-light shadow mt-3">
+        <div class="card-header" type="button" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            <i class="fas fa-filter"></i> FILTER
+        </div>
+        <div class="collapse card-body" id="collapseExample">
+            <form action="" method="get">
+                {{ filter.form | crispy }}
+                <button type="submit" class="btn btn-outline-purple">SEARCH</button>
+            </form>
+        </div>
+    </div>
+    {% for course in filter.qs %}
     <!-- COURSE CARDLIST -->
-        <div class="card mt-3 mb-3 shadow">
-            <div class="card-header bg-purple text-light">
-                <i class="far fa-calendar-alt"></i> {{ course.date }}
-            </div>
-            <div class="card-body p-0">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="pt-3 pb-1 px-3">
-                            <h5 class="card-title">{{ course.name }}</h5>
-                            <p class="card-text m-2">{{ course.description | linebreaks | truncatewords:50 }}</p>
+    <div class="card mt-3 mb-3 shadow">
+        <div class="card-header bg-purple text-light">
+            <i class="far fa-calendar-alt"></i> {{ course.date }}
+        </div>
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="pt-3 pb-1 px-3">
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <p class="card-text m-2">{{ course.description | linebreaks | truncatewords:50 }}</p>
 
-                            <!-- BUTTON FOR EDITING COURSE FOR STAFF MEMBERS -->
-                            {% if user.is_staff %}
-                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'course-update' pk=course.id %}"><i class="fas fa-edit mr-2"></i>Edit course</a>
-                            {% endif %}
+                        <!-- BUTTON FOR EDITING COURSE FOR STAFF MEMBERS -->
+                        {% if user.is_staff %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'course-update' pk=course.id %}"><i
+                                class="fas fa-edit mr-2"></i>Edit course</a>
+                        {% endif %}
 
-                            <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}"><i class="fas fa-info-circle mr-2"></i>More info</a>
+                        <a class="btn btn-sm btn-outline-purple" href="{% url 'course-detail' pk=course.id %}"><i
+                                class="fas fa-info-circle mr-2"></i>More info</a>
 
-                            <!-- BUTTON FOR SIGNUP, IF ALREADY SIGNED UP A DISABLED BUTTON IS SHOWN -->
-                                {% if course.id in signedup %}
-                                    <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' id=course.id %}"><i class="fas fa-check-double mr-2"></i>Signed up</a>
-                                {% else %}
-                                    <a class="btn btn-sm btn-outline-success" href="{% url 'signup' id=course.id %}"><i class="fas fa-user-plus mr-2"></i>Sign up</a>
+                        <!-- BUTTON FOR SIGNUP, IF ALREADY SIGNED UP A DISABLED BUTTON IS SHOWN -->
+                        {% if course.id in signedup %}
+                        <a class="btn btn-sm btn-secondary disabled" href="{% url 'signup' id=course.id %}"><i
+                                class="fas fa-check-double mr-2"></i>Signed up</a>
+                        {% else %}
+                        <a class="btn btn-sm btn-outline-success" href="{% url 'signup' id=course.id %}"><i
+                                class="fas fa-user-plus mr-2"></i>Sign up</a>
+                        {% endif %}
+
+                        <!-- EXTRA INFO ABOUT THE COURSE -->
+                        <div class="mt-2 mb-0">
+                            <small class="text-muted">
+                                <!-- Costs for the course -->
+                                {% if course.costs != 0 %}
+                                <i class="fas fa-euro-sign"></i>
+                                {{ course.costs }}
                                 {% endif %}
+                                <!-- Target audience for course -->
+                                <i class="fas fa-users ml-3"></i>
+                                {% if course.ngt %}
+                                <span class="ml-2">NGT </span>
+                                {% endif%}
+                                {% if course.schrijftolk %}
+                                <span class="ml-2">Schrijftolk </span>
+                                {% endif%}
+                                {% if course.asl %}
+                                <span class="ml-2">ASL </span>
+                                {% endif%}
+                                {% if course.combitolk %}
+                                <span class="ml-2">Combitolk</span>
+                                {% endif%}
 
+                                <!-- Credtit for course -->
+                                <i class="far fa-credit-card ml-3"></i>
+                                {% if course.credit_language_and_interpreting_skills != 0 %}
+                                <span class="ml-2">{{ course.credit_language_and_interpreting_skills }} Language &
+                                    Interpreting</span>
+                                {% endif%}
+                                {% if course.credit_attitude != 0 %}
+                                <span class="ml-2">{{ course.credit_attitude }} Attitude</span>
+                                {% endif%}
+                                {% if course.credit_target_audiences != 0 %}
+                                <span class="ml-2">{{ course.credit_target_audiences }} Target audience</span>
+                                {% endif%}
 
-                            <!-- EXTRA INFO ABOUT THE COURSE -->
-                            <div class="mt-2 mb-0">
-                                <small class="text-muted">
-                                    <!-- Costs for the course -->
-                                    {% if course.costs != 0 %}
-                                    <i class="fas fa-euro-sign"></i>
-                                    {{ course.costs }}
-                                    {% endif %}
-                                    <!-- Target audience for course -->
-                                    <i class="fas fa-users ml-3"></i>
-                                    {% if course.ngt %}
-                                    <span class="ml-2">NGT </span>
-                                    {% endif%}
-                                    {% if course.schrijftolk %}
-                                    <span class="ml-2">Schrijftolk </span>
-                                    {% endif%}
-                                    {% if course.asl %}
-                                    <span class="ml-2">ASL </span>
-                                    {% endif%}
-                                    {% if course.combitolk %}
-                                    <span class="ml-2">Combitolk</span>
-                                    {% endif%}
-
-                                    <!-- Credtit for course -->
-                                    <i class="far fa-credit-card ml-3"></i>
-                                    {% if course.credit_language_and_interpreting_skills != 0 %}
-                                    <span class="ml-2">{{ course.credit_language_and_interpreting_skills }} Language &
-                                        Interpreting</span>
-                                    {% endif%}
-                                    {% if course.credit_attitude != 0 %}
-                                    <span class="ml-2">{{ course.credit_attitude }} Attitude</span>
-                                    {% endif%}
-                                    {% if course.credit_target_audiences != 0 %}
-                                    <span class="ml-2">{{ course.credit_target_audiences }} Target audience</span>
-                                    {% endif%}
-
-                                </small>
-                            </div>
+                            </small>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <img class="d-none d-md-block float-right mt-0 ml-0 mb-0 img-fluid" src="{{ course.image.url }}"
-                            alt="image {{ course.name }}">
-                    </div>
+                </div>
+                <div class="col-md-3">
+                    <img class="d-none d-md-block float-right mt-0 ml-0 mb-0 img-fluid" src="{{ course.image.url }}"
+                        alt="image {{ course.name }}">
                 </div>
             </div>
         </div>
+    </div>
     <!-- </a> -->
     {% endfor %}
 </div>

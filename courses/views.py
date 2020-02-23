@@ -15,6 +15,7 @@ from signups.models import Signup
 from users.views import is_staff
 from .forms import NewCourseForm, NewCourseTypeForm, NewLocationForm
 from .models import Courses, Course_type, Location
+from .filters import CoursesFilter
 
 
 class CourseListView(ListView):
@@ -25,8 +26,14 @@ class CourseListView(ListView):
     def get_context_data(self, **kwargs):
         # get the default context data
         context = super(CourseListView, self).get_context_data(**kwargs)
-        # add signed up courses of user to context
-        context["signedup"] = Signup.objects.filter(registrant=self.request.user).values_list("course_id", flat=True)
+        # If user is logged in find all the courses user signed up for otherwise return empty dict.
+        user = self.request.user
+        if user.is_authenticated:
+            context["signedup"] = Signup.objects.filter(registrant=user).values_list("course_id", flat=True)
+        else:
+            context["signedup"] = {}
+        # Queryset based on the query the user submitted
+        context["filter"] = CoursesFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
 
