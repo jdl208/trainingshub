@@ -3,23 +3,31 @@
 {% block content %}
 <div class="container mt-3">
     <div class="row">
-        <div class="col-md-6 offset-md-3 bg-white border rounded p-3 px-3 shadow-lg">
-            <form action="" method="POST">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Log In</legend>
-                    {{ form | crispy }}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-purple" type="submit">Log In</button>
-                    <small class="text-muted ml-2">
-                        <a href="{% url 'password_reset' %}">Forgot password?</a>
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+                <div class="card-header bg-purple">
+                    <h5 class="m-0">Log In</h5>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form | crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-purple" type="submit">Log In</button>
+                            <small class="text-muted ml-2">
+                                <a href="{% url 'password_reset' %}">Forgot password?</a>
+                            </small>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Do you need an account?
+                        <a href="{% url 'register' %}" class="ml-2">Register
+                            now</a>
                     </small>
                 </div>
-            </form>
-            <div class="border-top pt-3">
-                <small class="text-muted">Do you need an account? <a href="{% url 'register' %}" class="ml-2">Register
-                        now</a></small>
             </div>
         </div>
     </div>
