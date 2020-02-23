@@ -36,12 +36,8 @@ def logout(request):
 @login_required
 def account(request):
     context = {
-        "upcoming": Signup.objects.filter(
-            registrant=request.user, course__date__gte=datetime.today()
-        ),
-        "past": Signup.objects.filter(
-            registrant=request.user, course__date__lt=datetime.today()
-        ),
+        "upcoming": Signup.objects.filter(registrant=request.user, course__date__gte=datetime.today()),
+        "past": Signup.objects.filter(registrant=request.user, course__date__lt=datetime.today()),
         "user": request.user,
     }
     return render(request, "users/user_detail.html", context)
@@ -51,9 +47,7 @@ def account(request):
 def profile(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile
-        )
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
