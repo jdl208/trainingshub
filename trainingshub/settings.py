@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = False
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "trainingshub.herokuapp.com"]
 
@@ -86,6 +86,8 @@ WSGI_APPLICATION = "trainingshub.wsgi.application"
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 if DEBUG:
+    # DEVELOPEMENT DATABASE
+    print("TESTING")
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -93,7 +95,9 @@ if DEBUG:
         }
     }
 else:
-    DATABASES = {"default": {dj_database_url.parse(os.getenv("DATABASE_URL"))}}
+    # PRODUCTION DATABASE
+    print("PRODUCTION")
+    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
