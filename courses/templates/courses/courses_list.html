@@ -3,18 +3,9 @@
 
 {% block content %}
 <div class="container">
-    <div class="card bg-light shadow mt-3">
-        <div class="card-header" type="button" data-toggle="collapse" data-target="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample">
-            <i class="fas fa-filter"></i> FILTER
-        </div>
-        <div class="collapse card-body" id="collapseExample">
-            <form action="" method="get">
-                {{ filter.form | crispy }}
-                <button type="submit" class="btn btn-outline-purple">SEARCH</button>
-            </form>
-        </div>
-    </div>
+    <button type="button" class="btn btn-sm btn-outline-purple mt-3" data-toggle="modal" data-target="#exampleModal">
+        <small><i class="fas fa-filter"></i></small> Show filters
+    </button>
     {% for course in filter.qs %}
     <!-- COURSE CARDLIST -->
     <div class="card mt-3 mb-3 shadow">
@@ -97,3 +88,24 @@
     {% endfor %}
 </div>
 {% endblock content %}
+{% block modals %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-purple">
+                <h5 class="modal-title" id="exampleModalLabel">FILTER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="get">
+                    {{ filter.form | crispy}}
+                    <button type="submit" class="btn btn-outline-purple">SEARCH</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock modals %}
