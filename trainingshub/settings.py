@@ -87,7 +87,7 @@ WSGI_APPLICATION = "trainingshub.wsgi.application"
 
 if DEBUG:
     # DEVELOPEMENT DATABASE
-    print("TESTING")
+    print("TEST DATABASE RUNNING")
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -96,7 +96,7 @@ if DEBUG:
     }
 else:
     # PRODUCTION DATABASE
-    print("PRODUCTION")
+    print("PRODUCTION DATABASE RUNNING")
     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 # Password validation
