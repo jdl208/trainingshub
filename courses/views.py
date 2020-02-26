@@ -37,6 +37,63 @@ class CourseListView(ListView):
         return context
 
 
+class TrainingListView(ListView):
+    model = Courses
+    queryset = Courses.objects.filter(date__gte=datetime.today(), course_type_id=1)
+    ordering = ["date"]
+
+    def get_context_data(self, **kwargs):
+        # get the default context data
+        context = super(TrainingListView, self).get_context_data(**kwargs)
+        # If user is logged in find all the courses user signed up for otherwise return empty dict.
+        user = self.request.user
+        if user.is_authenticated:
+            context["signedup"] = Signup.objects.filter(registrant=user).values_list("course_id", flat=True)
+        else:
+            context["signedup"] = {}
+        # Queryset based on the query the user submitted
+        context["filter"] = CoursesFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
+class MeetGreetListView(ListView):
+    model = Courses
+    queryset = Courses.objects.filter(date__gte=datetime.today(), course_type_id=2)
+    ordering = ["date"]
+
+    def get_context_data(self, **kwargs):
+        # get the default context data
+        context = super(MeetGreetListView, self).get_context_data(**kwargs)
+        # If user is logged in find all the courses user signed up for otherwise return empty dict.
+        user = self.request.user
+        if user.is_authenticated:
+            context["signedup"] = Signup.objects.filter(registrant=user).values_list("course_id", flat=True)
+        else:
+            context["signedup"] = {}
+        # Queryset based on the query the user submitted
+        context["filter"] = CoursesFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
+class KnowledgeEveningListView(ListView):
+    model = Courses
+    queryset = Courses.objects.filter(date__gte=datetime.today(), course_type_id=3)
+    ordering = ["date"]
+
+    def get_context_data(self, **kwargs):
+        # get the default context data
+        context = super(KnowledgeEveningListView, self).get_context_data(**kwargs)
+        # If user is logged in find all the courses user signed up for otherwise return empty dict.
+        user = self.request.user
+        if user.is_authenticated:
+            context["signedup"] = Signup.objects.filter(registrant=user).values_list("course_id", flat=True)
+        else:
+            context["signedup"] = {}
+        # Queryset based on the query the user submitted
+        context["filter"] = CoursesFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
 class CourseDetailView(DetailView):
     model = Courses
 

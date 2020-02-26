@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section class="page-section clearfix">
-  <div class="container">
+<div class="container mt-3">
+  <div class="clearfix my-5">
     <div class="intro">
       <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{%static 'img/fp-img.jpg' %}" alt="">
-      <div class="intro-text left-0 text-center bg-white text-purple p-5 rounded border-purple shadow">
+      <div class="intro-text left-0 text-center bg-white-faded text-purple p-5 rounded shadow">
         <h2 class="section-heading mb-4">
           <span class="section-heading-upper">Welcome to</span>
           <span class="section-heading-lower">De Trainingshub</span>
@@ -15,10 +15,49 @@
           optio accusantium!
         </p>
         <div class="intro-button mx-auto s">
-          <a class="btn bg-purple btn-lg shadow" href="{% url 'course-list' %}">Browse courses</a>
+          <a class="btn btn-outline-purple btn-lg shadow" href="{% url 'course-list' %}">Browse courses</a>
         </div>
       </div>
     </div>
+  </div> <!-- 3 CARDS WITH EXPLANATION OF THE COURSE TYPES -->
+  <div class="row">
+    <!-- TRAING CARD -->
+    <div class="col-md-4 mb-3">
+      <div class="card h-100 shadow">
+        <div class="card-header bg-purple">Training</div>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum quidem quod officiis
+            nulla quibusdam ut. Culpa similique illo, laboriosam blanditiis sed quam voluptatibus nemo reiciendis
+            consequuntur odit, in quae aliquam.</p>
+        </div>
+        <a type="button" class="mx-auto mb-3 btn btn-outline-purple" href="{% url 'training-list'%}">Browse</a>
+      </div>
+    </div>
+    <!-- MEET & GREET CARD -->
+    <div class="col-md-4 mb-3">
+      <div class="card h-100 shadow ">
+        <div class="card-header bg-purple">Meet & Greet</div>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus optio nihil dolorum
+            recusandae ipsam, animi sequi odit saepe quasi adipisci nemo voluptate dolore hic, at veniam natus eius
+            eaque
+            blanditiis.</p>
+        </div>
+        <a type="button" class="mx-auto btn btn-outline-purple mb-3" href="{% url 'meet-greet-list'%}">Browse</a>
+      </div>
+    </div>
+    <!-- KNOWLEDGE EVENING CARD -->
+    <div class="col-md-4 mb-3">
+      <div class="card h-100 shadow">
+        <div class="card-header bg-purple">Knowledge evening</div>
+        <div class="card-body">
+          <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi, quidem iste aperiam
+            dolores ab cupiditate repellendus voluptatum impedit est in, ea molestias, nobis veritatis. Nobis doloribus
+            velit dolores laborum delectus?</p>
+        </div>
+        <a type="button" class="mx-auto mb-3 btn btn-outline-purple" href="{% url 'knowledge-evening-list'%}">Browse</a>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 {% endblock content %}
