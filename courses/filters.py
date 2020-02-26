@@ -1,14 +1,15 @@
-import django_filters
+import django_filters as df
 from .models import Courses
 
 
-class CoursesFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr="icontains")
+class CoursesFilter(df.FilterSet):
+    name = df.CharFilter(lookup_expr="icontains")
 
     class Meta:
         model = Courses
         fields = [
             "name",
+            "course_type",
             "ngt",
             "asl",
             "schrijftolk",
