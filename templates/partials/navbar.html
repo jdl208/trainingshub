@@ -44,52 +44,71 @@
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-white-faded navbar-light">
-    <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'img/th - logo-full.svg' %}" class="d-inline-block align-top mr-3" alt="logo">
-    </a>
-    <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
-        <span id="navbtn"><i class="fas fa-bars"></i></span>
-    </button>
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'img/th - logo-full.svg' %}" class="d-inline-block align-top mr-3" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span id="navbtn"><i class="fas fa-bars"></i></span>
+        </button>
 
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            {% if request.user.is_staff %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Admin
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'signuplist' %}">Course list</a>
-                    <a class="dropdown-item" href="{% url 'course-create'%}">Add course</a>
-                    <a class="dropdown-item" href="{% url 'course-type-create' %}">Add course-type</a>
-                    <a class="dropdown-item" href="{% url 'location-create' %}">Add location</a>
-                    <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
-                </div>
-            </li>
-            {% endif %}
-            <!-- WHAT USERS GET TO SEE IN THE NAVIGATION MENU -->
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
-            </li>
-            <!-- WHEN THEY ARE LOGGED IN -->
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'account' %}">Account</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
-            {% else %}
-            <!-- WHEN THEY ARE NOT LOGGED IN -->
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                {% if request.user.is_staff %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'signuplist' %}">Course list</a>
+                        <a class="dropdown-item" href="{% url 'course-create'%}">Add course</a>
+                        <a class="dropdown-item" href="{% url 'course-type-create' %}">Add course-type</a>
+                        <a class="dropdown-item" href="{% url 'location-create' %}">Add location</a>
+                        <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
+                    </div>
+                </li>
+                {% endif %}
+                <!-- WHAT USERS GET TO SEE IN THE NAVIGATION MENU -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+                </li>
+                <!-- WHEN THEY ARE LOGGED IN -->
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account' %}">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" href="#logoutModal">Logout</a>
+                </li>
+                {% else %}
+                <!-- WHEN THEY ARE NOT LOGGED IN -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
 
-            {% endif %}
-        </ul>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Are you sure you want to log out?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a type="button" href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
+            </div>
+        </div>
+    </div>
+</div>
