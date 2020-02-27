@@ -1,8 +1,48 @@
+{% load static %}
 <!-- STICKY FOOTER -->
 <Footer class="bg-purple text-light mt-4">
     <div class="container">
-        <p>About</p>
-        <p>Pricing</p>
-        <p>Etc.</p>
+        <div class="row py-3">
+            <div class="col-md-4">
+                <ul class="footer-list">
+                    <li><a href="">About us</a></li>
+                    <li><a href="">Privacy statement</a></li>
+                    <li><a href="">Terms & conditions</a></li>
+                    <li><a href="">Complaints</a></li>
+                    <li><a href="">Pick up service</a></li>
+                    <li><a href="">Payment</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-2">Follow us on Facebook</div>
+                <div>We are accredited by:</div>
+                <a href=""><img class="img-fluid" src="{% static 'img/rtgs.png' %}" alt=""></a>
+                <a href=""><img class="img-fluid" src="{% static 'img/wbtv.png' %}" alt=""></a>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-university float-left mr-2"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    <li>De Traininghub Woerden</li>
+                    <li>Klompenmakersweg 2</li>
+                    <li>3449JB Woerden</li>
+                </ul>
+                <i class="fas fa-at float-left mr-2"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    <li><a href="mailto:trainingshubwoerden@icloud.com">trainingshubwoerden@icloud.com</a></li>
+                </ul>
+                <i class="fas fa-mobile-alt float-left mr-3"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    <li><a href="tel:+31681103785">06-8110 3785</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="bg-dark-purple">
+        <div class="container">
+            <div class="text-center">
+                <div class="py-2"><small>Copyright: Onlion Software. For educational purposes only.</small></div>
+            </div>
+        </div>
     </div>
 </Footer>

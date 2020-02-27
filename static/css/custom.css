@@ -21,7 +21,12 @@ main {
 }
 
 .bg-purple {
-    background-color: rgba(99, 109, 195, 0.9);
+    background-color: #636dc3;
+    color: #ffffff;
+}
+
+.bg-dark-purple {
+    background-color: #464e8f;
     color: #ffffff;
 }
 
@@ -168,5 +173,11 @@ td.min {
 
 /* COURSES */
 .course_link:hover {
+    text-decoration: none;
+}
+
+/* FOOTER */
+footer a {
+    color: #ffffff;
     text-decoration: none;
 }
