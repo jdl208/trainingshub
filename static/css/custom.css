@@ -1,16 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Catamaran:400,700&display=swap");
 
-/* STICKY FOOTER */
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+    display: flex; /* this is for the sticky footer  */
+    min-height: 100vh; /* this is for the sticky footer  */
+    flex-direction: column; /* this is for the sticky footer  */
     font-family: "Catamaran", sans-serif;
     background-image: url("/static/img/bg.jpg");
     background-repeat: repeat;
     background-attachment: fixed;
 }
-
+/* This is set to make the footer stick to the bottom of the page at all times */
 main {
     flex: 1 0 auto;
 }
@@ -22,7 +21,7 @@ main {
 }
 
 .bg-purple {
-    background-color: #636dc3;
+    background-color: rgba(99, 109, 195, 0.9);
     color: #ffffff;
 }
 
@@ -140,7 +139,7 @@ nav img {
         width: 100%;
         left: 0;
         position: absolute;
-        bottom: -2rem;
+        bottom: -1.5rem;
     }
 }
 
