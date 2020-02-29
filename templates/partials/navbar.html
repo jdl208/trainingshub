@@ -43,7 +43,7 @@
 </nav>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg ">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static 'img/th - logo-full.svg' %}" class="d-inline-block align-top mr-3" alt="logo">
@@ -53,41 +53,41 @@
         </button>
 
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-purple">
                 {% if request.user.is_staff %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link text-purple dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'signuplist' %}">Course list</a>
-                        <a class="dropdown-item" href="{% url 'course-create'%}">Add course</a>
-                        <a class="dropdown-item" href="{% url 'course-type-create' %}">Add course-type</a>
-                        <a class="dropdown-item" href="{% url 'location-create' %}">Add location</a>
-                        <a class="dropdown-item" href="{% url 'user_list' %}">Users</a>
+                        <a class="dropdown-item text-purple" href="{% url 'signuplist' %}">Course list</a>
+                        <a class="dropdown-item text-purple" href="{% url 'course-create'%}">Add course</a>
+                        <a class="dropdown-item text-purple" href="{% url 'course-type-create' %}">Add course-type</a>
+                        <a class="dropdown-item text-purple" href="{% url 'location-create' %}">Add location</a>
+                        <a class="dropdown-item text-purple" href="{% url 'user_list' %}">Users</a>
                     </div>
                 </li>
                 {% endif %}
                 <!-- WHAT USERS GET TO SEE IN THE NAVIGATION MENU -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'course-list' %}">Courses</a>
+                    <a class="nav-link text-purple" href="{% url 'course-list' %}">Courses</a>
                 </li>
                 <!-- WHEN THEY ARE LOGGED IN -->
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account' %}">Account</a>
+                    <a class="nav-link text-purple" href="{% url 'account' %}">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" href="#logoutModal">Logout</a>
+                    <a class="nav-link text-purple" data-toggle="modal" href="#logoutModal">Logout</a>
                 </li>
                 {% else %}
                 <!-- WHEN THEY ARE NOT LOGGED IN -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link text-purple" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link text-purple" href="{% url 'register' %}">Register</a>
                 </li>
 
                 {% endif %}
