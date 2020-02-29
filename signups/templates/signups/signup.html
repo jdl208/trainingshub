@@ -8,26 +8,29 @@
         {% csrf_token %}
         <div class="card mt-4 shadow">
             <div class="card-header bg-purple">
-                Personal Information
+                Signup Information
             </div>
             <div class="card-body">
                 <!-- COURSE INFO -->
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <img src="{{ course.image.url }}" alt="" class="img-fluid rounded w-25">
-                        {{ course.name }}
+                <div class="row border-bottom pb-3 mb-3">
+                    <div class="col-sm-auto pr-0"><img src="{{ course.image.url }}" alt="" class="signup-img">
                     </div>
-                    <div>
-                        € {{ course.costs }}
+                    <div class="col my-auto">{{ course.name }}</div>
+                    <div class="col-sm-auto my-auto">€ {{ course.costs }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-auto pr-0"><img src="{{ request.user.profile.image.url }}" alt=""
+                            class="rounded-circle signup-img">
+                    </div>
+                    <div class="col my-auto">
+                        <div>{{ request.user.first_name }} {{ request.user.last_name }}</div>
+                        <div>
+                            <small>RTGS nr:</small> {{ request.user.profile.rtgs_nr }}
+                        </div>
+
                     </div>
                 </div>
-                <div>
-                    <img src="{{ request.user.profile.image.url }}" alt=""
-                        class="img-fluid rounded">{{ request.user.first_name }}
-                    <span>{{ request.user.last_name }}</span><br>
-                    <small>RTGS nr:</small> {{ request.user.profile.rtgs_nr }}
-                </div>
-                <div>Invoice information:</div>
+                <div><strong>Invoice information:</strong></div>
                 {{ s_form | crispy }}
                 <div class="mt-3">
                     {% if signedup %}

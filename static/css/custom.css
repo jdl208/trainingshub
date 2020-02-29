@@ -54,6 +54,13 @@ nav img {
     width: auto;
 }
 
+.nav-link:hover,
+.dropdown-item:hover {
+    border-radius: 5%;
+    background-color: #636dc3;
+    color: white;
+}
+
 .account-image {
     max-width: 100px;
     height: auto;
@@ -174,6 +181,13 @@ td.min {
 /* COURSES */
 .course_link:hover {
     text-decoration: none;
+}
+
+/* SINGUPS */
+/* signup form */
+
+.signup-img {
+    max-width: 40px;
 }
 
 /* FOOTER */
