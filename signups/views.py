@@ -29,9 +29,7 @@ def signup(request, id):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(
-                request, f"You have successfully registerd for {course.name}!"
-            )
+            messages.success(request, f"You have successfully registerd for {course.name}!")
             return redirect("account")
 
     # Check if user already registerd for the course
@@ -51,11 +49,7 @@ def signup(request, id):
             "city": f"{request.user.profile.city}",
         }
     )
-    return render(
-        request,
-        "signups/signup.html",
-        {"course": course, "s_form": signup_form, "signedup": signedup},
-    )
+    return render(request, "signups/signup.html", {"course": course, "s_form": signup_form, "signedup": signedup},)
 
 
 @login_required
@@ -106,8 +100,23 @@ def is_staff(user):
 
 @user_passes_test(is_staff, login_url="home")
 def signup_list(request):
+    """
+    Generate a list with all the upcoming courses. Sorted first coming date first.
+    """
     context = {
-        "courses": Courses.objects.filter(date__gte=datetime.today()),
-        "courses_complete": Courses.objects.filter(date__lt=datetime.today()),
+        "courses": Courses.objects.filter(date__gte=datetime.today()).order_by("date"),
+        "title": "Upcoming courses",
+    }
+    return render(request, "signups/course-signup-list.html", context)
+
+
+@user_passes_test(is_staff, login_url="home")
+def signup_list_completed(request):
+    """
+    Generate a list with all the upcoming courses. Sorted latest date first
+    """
+    context = {
+        "courses": Courses.objects.filter(date__lt=datetime.today()).order_by("-date"),
+        "title": "Completed courses",
     }
     return render(request, "signups/course-signup-list.html", context)
