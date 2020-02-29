@@ -2,63 +2,62 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container mt-3">
-    <div class="row">
-        <div class="col-12 bg-white shadow-lg border rounded p-3 px-3">
-            <div class="row">
-                <form class="col-12" action="" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        <div class="row">
-                            <legend class="col-12 border-bottom col-12 mb-4">Profile Info</legend>
-                        </div>
-                        <div class="row">
-                            <img class="account-image rounded-circle col-md-4" src="{{ user.profile.image.url }}" alt="Card image cap">
-                            <div class="col-md-8 pt-2">
-                                {{ p_form.image }}
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-5">
-                                {{ u_form.first_name | as_crispy_field }}
-                            </div>
-                            <div class="col-md-5">
-                                {{ u_form.last_name | as_crispy_field }}
-                            </div>
-                            <div class="col-md-2">
-                                {{ p_form.rtgs_nr | as_crispy_field}}
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                {{ u_form.username | as_crispy_field }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                {{ p_form.company_name | as_crispy_field }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ p_form.address | as_crispy_field }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ p_form.postcode | as_crispy_field }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ p_form.city | as_crispy_field }}
-                            </div>
-                        </div>
-                        <div class="row">
-                        </div>
-
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-info" type="submit">Update</button>
+    <div class="card shadow">
+        <div class="card-header bg-purple">Profile Info</div>
+        <div class="card-body">
+            <form class="" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <div class="row">
                     </div>
-                </form>
-            </div>
+                    <div class="row">
+                        <img class="account-image rounded-circle col-md-4" src="{{ user.profile.image.url }}"
+                            alt="Card image cap">
+                        <div class="col-md-8 pt-2">
+                            {{ p_form.image }}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-5">
+                            {{ u_form.first_name | as_crispy_field }}
+                        </div>
+                        <div class="col-md-5">
+                            {{ u_form.last_name | as_crispy_field }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ p_form.rtgs_nr | as_crispy_field}}
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ u_form.username | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ p_form.company_name | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ p_form.address | as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ p_form.postcode | as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ p_form.city | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-purple" type="submit">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
