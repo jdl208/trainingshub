@@ -2,8 +2,8 @@
 <!-- STICKY FOOTER -->
 <Footer class="bg-purple text-light mt-4">
     <div class="container">
-        <div class="row py-3">
-            <div class="col-md-4">
+        <div class="row ">
+            <div class="col-md-4 py-3">
                 <ul class="footer-list">
                     <li><a href="">About us</a></li>
                     <li><a href="">Privacy statement</a></li>
@@ -13,13 +13,21 @@
                     <li><a href="">Payment</a></li>
                 </ul>
             </div>
-            <div class="col-md-4">
-                <div class="mb-2">Follow us on Facebook</div>
-                <div>We are accredited by:</div>
-                <a href=""><img class="img-fluid" src="{% static 'img/rtgs.png' %}" alt=""></a>
-                <a href=""><img class="img-fluid" src="{% static 'img/wbtv.png' %}" alt=""></a>
+            <div class="col-md-4 py-3 pl-4">
+                <ul class="list-unstyled">
+                    <li>We are accredited by:</li>
+                    <li class="my-2">
+                        <a href="">
+                            <img class="img-fluid footer-image" src="{% static 'img/rtgs.png' %}" alt="">
+                        </a></li>
+                    <li>
+                        <a class="align-bottom" href="">
+                            <img class="img-fluid footer-image" src="{% static 'img/wbtv.png' %}" alt="">
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 py-3 pl-4">
                 <i class="fas fa-university float-left mr-2"></i>
                 <ul class="list-unstyled overflow-hidden">
                     <li>De Traininghub Woerden</li>
@@ -34,6 +42,11 @@
                 <ul class="list-unstyled overflow-hidden">
                     <li><a href="tel:+31681103785">06-8110 3785</a></li>
                 </ul>
+                <i class="fab fa-facebook-square float-left mr-2"></i>
+                <ul class="list-unstyled overflow-hidden">
+                    <li><a href="https://nl-nl.facebook.com/trainingshubwoerden/">Follow us on Facebook</a></li>
+                </ul>
+
             </div>
 
         </div>
