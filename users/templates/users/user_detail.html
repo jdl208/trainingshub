@@ -50,16 +50,6 @@
                                             <a title="More info" href="{% url 'course-detail' pk=i.course.id %}">
                                                 <i class="fas fa-info-circle btn btn-outline-purple"></i>
                                             </a>
-                                            {% if i.paid %}
-                                            <a title="Pay for course € {{i.course.costs}}" href="">
-                                                <i class="fas fa-euro-sign btn btn-secondary disabled"></i>
-                                            </a>
-                                            {% else %}
-                                            <a title="Pay for course € {{i.course.costs}}"
-                                                href="{% url 'checkout' id=i.id %}">
-                                                <i class="fas fa-euro-sign btn btn-info"></i>
-                                            </a>
-                                            {% endif %}
                                         </td>
                                     </tr>
                                     {% endfor%}
@@ -78,20 +68,13 @@
                                             <img src="{{ i.course.image.url }}" alt="avatar"
                                                 class="small-img rounded-circle">
                                         </th>
-                                        <td>{{i.course.name}}<br><small>{{ i.course.date }}</small></td>
+                                        <td>{{i.course.name}}<br>
+                                            <small>{{ i.course.date }}</small>
+                                        </td>
                                         <td class="text-right align-middle">
-                                            <a href="{% url 'course-detail' pk=i.course.id %}"><i
-                                                    class="fas fa-info-circle btn btn-outline-purple"></i></a>
-                                            {% if i.paid %}
-                                            <span title="Payment has been fulfilled">
-                                                <i class="fas fa-euro-sign btn btn-secondary"></i>
-                                            </span>
-                                            {% else %}
-                                            <a title="Pay for course € {{i.course.costs}}"
-                                                href="{% url 'checkout' id=i.id %}">
-                                                <i class="fas fa-euro-sign btn btn-info"></i>
+                                            <a href="{% url 'course-detail' pk=i.course.id %}">
+                                                <i class="fas fa-info-circle btn btn-outline-purple"></i>
                                             </a>
-                                            {% endif %}
                                         </td>
                                     </tr>
                                     {% endfor%}
