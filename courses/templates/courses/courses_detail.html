@@ -72,8 +72,9 @@
             </div>
             {% if object.id not in signedup %}
             <div class="text-center mb-3">
-                <a class="btn btn-light text-purple btn-outline-purple" href="{% url 'signup' id=object.id %}">Sign
-                    up</a>
+                <a class="btn btn-light text-purple btn-outline-purple" href="{% url 'signup' id=object.id %}">
+                    <i class="fas fa-user-plus mr-2"></i>Sign up
+                </a>
             </div>
             {% else %}
             <div class="text-center mb-3">
