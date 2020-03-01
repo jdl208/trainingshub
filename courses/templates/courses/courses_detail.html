@@ -70,9 +70,18 @@
                     <li>{{object.location.postcode}} {{object.location.city}}</li>
                 </ul>
             </div>
+            {% if object.id not in signedup %}
             <div class="text-center mb-3">
-                <a class="btn btn-light text-purple btn-outline-purple" href="{% url 'signup' id=object.id %}">Sign up</a>
+                <a class="btn btn-light text-purple btn-outline-purple" href="{% url 'signup' id=object.id %}">Sign
+                    up</a>
             </div>
+            {% else %}
+            <div class="text-center mb-3">
+                <a class="btn btn-light text-purple btn-secondary disabled" href="{% url 'home' %}">
+                    <i class="fas fa-check-double mr-2"></i>Signed up
+                </a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

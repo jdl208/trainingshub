@@ -97,6 +97,13 @@ class KnowledgeEveningListView(ListView):
 class CourseDetailView(DetailView):
     model = Courses
 
+    def get_context_data(self, **kwargs):
+        # get the default context data
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        # If user is logged in find all the courses user signed up for otherwise return empty dict.
+        context["signedup"] = Signup.objects.filter(registrant=self.request.user).values_list("course_id", flat=True)
+        return context
+
 
 class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     """
