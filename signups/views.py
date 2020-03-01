@@ -16,7 +16,17 @@ stripe.api_key = settings.STRIPE_SECRET
 
 @login_required
 def signup(request, id):
+    """
+    Create a signup form for the selected course.
+    """
     course = Courses.objects.get(pk=id)
+
+    # If user us already signed up for course. Redirect to the course list
+    if Signup.objects.filter(course=course).filter(registrant=request.user):
+        messages.info(request, f"You already signed up for the course: {course.name} !")
+        return redirect("course-list")
+    else:
+        signedup = False
 
     # Go to paymentform before confirming registration
     if request.method == "POST" and request.POST["payment_method"] == "CC":
@@ -31,13 +41,6 @@ def signup(request, id):
             form.save()
             messages.success(request, f"You have successfully registerd for {course.name}!")
             return redirect("account")
-
-    # Check if user already registerd for the course
-    if Signup.objects.filter(course=course).filter(registrant=request.user):
-        messages.info(request, f"Already signed up for this course!")
-        signedup = True
-    else:
-        signedup = False
 
     # Generate the signup form with prefilled fields
     signup_form = SignupForm(
@@ -54,6 +57,9 @@ def signup(request, id):
 
 @login_required
 def checkout(request, id):
+    """
+    Create a payment form for the selected course. Right now they can only pay by credit card.
+    """
     signup = Signup.objects.get(pk=id)
     course = Courses.objects.get(id=signup.course_id)
     # signup for course and pay via payment provider
