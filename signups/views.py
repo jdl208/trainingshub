@@ -120,3 +120,15 @@ def signup_list_completed(request):
         "title": "Completed courses",
     }
     return render(request, "signups/course-signup-list.html", context)
+
+
+@user_passes_test(is_staff, login_url="home")
+def signup_detail(request, id):
+    """
+    Generate a list with all the upcoming courses. Sorted latest date first
+    """
+    context = {
+        "course": Courses.objects.get(pk=id),
+        "signups": Signup.objects.filter(course_id=id),
+    }
+    return render(request, "signups/course-signup-detail.html", context)
