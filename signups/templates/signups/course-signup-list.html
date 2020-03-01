@@ -12,16 +12,16 @@
                             <th scope="col">Date</th>
                             <th scope="col">Name</th>
                             <th scope="col">Type</th>
-                            <th scope="col">Participants</th>
+                            <th class="min" scope="col">Participants</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in courses %}
-                        <tr class="clickable-row" data-href="{% url 'course-detail' pk=i.id %}">
+                        <tr class="clickable-row" data-href="{% url 'signup-detail' id=i.id %}">
                             <td>{{ i.date }}</td>
                             <td>{{ i.name }}</td>
                             <td>{{ i.course_type }}</td>
-                            <td class="text-center">{{ i.signup.count }}</td>
+                            <td class="min text-center">{{ i.signup.count }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
