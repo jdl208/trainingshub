@@ -12,3 +12,27 @@ def home(request):
         print(signedup_list)
     context = {"course": Courses.objects.last(), "signedup": signedup_list}
     return render(request, "home/home.html", context)
+
+
+def about(request):
+    return render(request, "home/about.html")
+
+
+def complaints(request):
+    return render(request, "home/complaints.html")
+
+
+def payment(request):
+    return render(request, "home/payment.html")
+
+
+def pickup_service(request):
+    return render(request, "home/pickup-service.html")
+
+
+def privacy(request):
+    return render(request, "home/privacy.html")
+
+
+def terms_conditions(request):
+    return render(request, "home/terms-conditions.html")

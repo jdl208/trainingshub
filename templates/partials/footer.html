@@ -5,12 +5,12 @@
         <div class="row ">
             <div class="col-md-4 py-3">
                 <ul class="footer-list">
-                    <li><a href="">About us</a></li>
-                    <li><a href="">Privacy statement</a></li>
-                    <li><a href="">Terms & conditions</a></li>
-                    <li><a href="">Complaints</a></li>
-                    <li><a href="">Pick up service</a></li>
-                    <li><a href="">Payment</a></li>
+                    <li><a href="{% url 'about' %}">About us</a></li>
+                    <li><a href="{% url 'privacy' %}">Privacy statement</a></li>
+                    <li><a href="{% url 'terms-conditions' %}">Terms & conditions</a></li>
+                    <li><a href="{% url 'complaints' %}">Complaints</a></li>
+                    <li><a href="{% url 'pickup-service' %}">Pick up service</a></li>
+                    <li><a href="{% url 'payment' %}">Payment</a></li>
                 </ul>
             </div>
             <div class="col-md-4 py-3 pl-4">
