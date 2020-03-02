@@ -19,7 +19,6 @@ class TestUrls(SimpleTestCase):
 
     def test_if_login_is_resolved(self):
         url = reverse("login")
-        print(resolve(url))
         self.assertURLEqual(resolve(url).func.view_class, av.LoginView)
 
     def test_if_logout_is_resolved(self):
