@@ -32,7 +32,3 @@ def pickup_service(request):
 
 def privacy(request):
     return render(request, "home/privacy.html")
-
-
-def terms_conditions(request):
-    return render(request, "home/terms-conditions.html")

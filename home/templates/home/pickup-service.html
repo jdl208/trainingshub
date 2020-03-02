@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
+{% load static%}
 {% block content %}
 <div class="container mt-3">
-  <div class="card">
+  <div class="card shadow ">
     <div class="card-header bg-purple">
       Pickup Service
     </div>
-    <div class="card-body">
-
+    <div class="card-body text-justify">
+      <h5 class="card-title">Shuttle service "Soeki"</h5>
+      <img src="{% static 'img/soeki.jpg' %}" alt="image of Suzanne and Dorothy"
+        class="img-fluid float-md-right pl-sm-0 pl-md-3">
+      <p>
+        Since January 2020, the Trainingshub has been located at Klompenmakersweg in Woerden. Our previous location was
+        next to the Woerden station so that people could also use public transport. It appears that our new location is
+        difficult to reach by public transport because you have to book in advance for a spot on the bus and then have
+        to walk a bit. We regret this! So we have found a solution: a Shuttle Service!
+      </p>
+      <p>
+        Do you want to follow a training with us and do you travel by public transport? Then state that you want to use
+        the shuttle service and you will be picked up and brought back by 'Soeki' the Subaru, from and to the station of
+        Woerden. There is room for 4 people and full is full. It's free of charge, but there is a tip jar on our
+        location.
+      </p>
     </div>
   </div>
 </div>
