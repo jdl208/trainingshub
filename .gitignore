@@ -3,7 +3,6 @@
 *.sqlite3
 *.pyc
 __pycache__/
-migrations/
 media/
 env.py
 htmlcov/
