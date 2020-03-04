@@ -60,6 +60,7 @@
 
 
   <!-- LAST ADDED COURSE -->
+  {% if course %}
   <div class="card mt-3 mb-3 shadow">
     <div class="card-header bg-purple text-light">
       <i class="far fa-calendar-alt"></i> {{ course.date }} - NEW COURSE
@@ -136,5 +137,6 @@
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 {% endblock content %}
