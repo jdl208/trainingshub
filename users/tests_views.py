@@ -17,11 +17,6 @@ class TestUserViews(TestCase):
         self.assertEqual(User.objects.first().username, "test@test.test")
 
     def test_logout(self):
-        # self.client.login(username="foo", password="bar")
-        response = self.client.get(reverse("logout"))
+        self.client.login(username="foo", password="bar")
+        response = self.client.get("/users/logout/")
         self.assertEqual(response.status_code, 302)
-
-    # def test_account(self):
-    #     # self.client.login(username="foo", password="bar")
-    #     response = self.client.get(reverse("account"))
-    #     self.assertEqual(response.status_code, 302)
