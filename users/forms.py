@@ -16,8 +16,6 @@ class UserRegisterForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(False)
         user.email = user.username
-        user.first_name = "First name"
-        user.last_name = "Last name"
         user = super().save()
         return user
 
