@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from django.contrib import auth, messages
+from django.contrib import messages, auth
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
@@ -13,12 +14,21 @@ from .forms import ProfileUpdateForm, UserRegisterForm, UserUpdateForm
 
 
 def register(request):
+    """
+    Create a register form and create a new user. When a new user is created,
+    keep him logged in and direct him to the profile page for additional prfile information
+    """
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get("username")
-            messages.success(request, f"Account created for {user}. Please fill in the additional information.")
+            messages.success(
+                request,
+                f" Account created for {user}. You are logged in. Please complete your profile with the additional information.",
+            )
+            new_user = authenticate(username=user, password=form.cleaned_data.get("password1"))
+            login(request, new_user)
             return redirect("profile")
     else:
         form = UserRegisterForm()
