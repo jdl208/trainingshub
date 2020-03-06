@@ -6,12 +6,10 @@ from .models import Profile
 
 class UserRegisterForm(UserCreationForm):
     username = forms.EmailField(max_length=75, label="Email")
-    first_name = forms.CharField(max_length=50, required=False, widget=forms.HiddenInput())
-    last_name = forms.CharField(max_length=50, required=False, widget=forms.HiddenInput())
 
     class Meta:
         model = User
-        fields = ["username", "password1", "password2", "first_name", "last_name"]
+        fields = ["username", "password1", "password2"]
 
     def save(self, commit=True):
         user = super().save(False)
