@@ -39,9 +39,7 @@ class Courses(models.Model):
     location = models.ForeignKey(Location, on_delete=models.PROTECT)
     places = models.IntegerField(default=0)
     description = models.TextField(null=True)
-    image = models.ImageField(
-        default="img/logo_trainingshub.png", upload_to="course_pics"
-    )
+    image = models.ImageField(default="course-default.svg", upload_to="course_pics")
 
     def __str__(self):
         return f"{self.date} - {self.name}"
