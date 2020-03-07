@@ -6,11 +6,20 @@ class DateInput(forms.DateInput):
     input_type = "date"
 
 
+class TimeInput(forms.TimeInput):
+    input_type = "time"
+
+
 class NewCourseForm(forms.ModelForm):
     class Meta:
         model = Courses
         fields = "__all__"
-        widgets = {"date": DateInput(), "ends": DateInput()}
+        widgets = {
+            "date": DateInput(),
+            "ends": DateInput(),
+            "time": TimeInput(),
+            "endtime": TimeInput(),
+        }
 
 
 class NewCourseTypeForm(forms.ModelForm):
@@ -44,9 +53,7 @@ class NewLocationForm(forms.ModelForm):
         }
         widgets = {
             "name": forms.TextInput(attrs={"placeholder": "Location name (required)"}),
-            "street_address": forms.TextInput(
-                attrs={"placeholder": "Street address (required)"}
-            ),
+            "street_address": forms.TextInput(attrs={"placeholder": "Street address (required)"}),
             "postcode": forms.TextInput(attrs={"placeholder": "Postcode (required)"}),
             "city": forms.TextInput(attrs={"placeholder": "Town or city (required)"}),
             "tel": forms.TextInput(attrs={"placeholder": "Telephone number"}),
