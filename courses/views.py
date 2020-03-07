@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.db.models import ProtectedError
 from django.views.generic import (
@@ -12,7 +12,6 @@ from django.views.generic import (
     UpdateView,
 )
 from signups.models import Signup
-from users.views import is_staff
 from .forms import NewCourseForm, NewCourseTypeForm, NewLocationForm
 from .models import Courses, Course_type, Location
 from .filters import CoursesFilter
@@ -177,7 +176,7 @@ class CourseTypeUpdateView(StaffRequiredMixin, UpdateView):
         return super(CourseTypeUpdateView, self).get_context_data(**kwargs)
 
 
-@user_passes_test(is_staff, login_url="home")
+@staff_member_required(login_url="home")
 def delete_course_type(request, id):
     try:
         Course_type.objects.get(pk=id).delete()
@@ -221,7 +220,7 @@ class LocationUpdateView(StaffRequiredMixin, UpdateView):
         return super(LocationUpdateView, self).get_context_data(**kwargs)
 
 
-@user_passes_test(is_staff, login_url="home")
+@staff_member_required(login_url="home")
 def delete_location(request, id):
     """
     Staff members can delete Locations.
