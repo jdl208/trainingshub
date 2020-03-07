@@ -1,86 +1,91 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- SEARCH FIELD -->
-<div class="container mt-3">
-    <div class="input-group">
-        <form action="{% url 'user-search' %}" method="get" class="col-md-4 offset-md-4">
-            <div class="input-group mt-3 mb-3 shadow">
-                <input class="form-control border-purple" type="text" name="q" aria-label="user"
-                    aria-describedby="button-addon2" placeholder="Search by name or email">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-purple" type="submit" id="button-addon2">Search</button>
-                </div>
+<div class="container">
+    <div class="card shadow bg-light mt-3">
+        <div class="card-header bg-purple">Users</div>
+        <div class="card-body">
+            <!-- SEARCH FIELD -->
+            <div class="input-group">
+                <form action="{% url 'user-search' %}" method="get" class="col-md-4 offset-md-4">
+                    <div class="input-group mt-3 mb-3">
+                        <input class="form-control border-purple" type="text" name="q" aria-label="user"
+                            aria-describedby="button-addon2" placeholder="Search by name or email">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-purple" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+            {% if users %}
+            <!-- POPULATE THE LIST WITH ALL THE USERS OR THE SEARCH RESULTS -->
+            <div class="table-responsive-md bg-white mt-3">
+                <table class="table table-striped table-hover m-auto ">
+                    <thead>
+                        <tr class="">
+                            <th scope="col"></th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Rtgs nr {{ users.len }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr class="clickable-row" data-href="{% url 'user-detail' id=user.id %}">
+                            <th class="p-1" scope="row"><img src="{{ user.profile.image.url }}" alt="avatar"
+                                    class="small-img rounded-circle">
+                            </th>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.profile.city }}</td>
+                            <td>{{ user.profile.rtgs_nr }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if users.paginator.num_pages > 1 %}
+            <nav class="mt-4" aria-label="...">
+                <ul class="pagination justify-content-center">
+                    {% if users.has_previous %}
+                    <li class="page-item ">
+                        <a class="page-link" href="?page=1" tabindex="-2">
+                            <i class="fas fa-angle-double-left text-purple"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">
+                            <i class="fas fa-angle-left text-purple"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <span class="page-link text-purple">{{ users.number }}/{{ users.paginator.num_pages }}</span>
+                    </li>
+                    {% if users.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.next_page_number }}">
+                            <i class="fas fa-angle-right text-purple"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ users.paginator.num_pages }}">
+                            <i class="fas fa-angle-double-right text-purple"></i>
+                        </a>
+                    </li>
+                    {% endif%}
+                </ul>
+            </nav>
+            {% endif %}
+            {% else %}
+            <!-- IMAGE WHEN THERE ARE NO RESULTS FOR THE QUERY -->
+            <div class="text-center">
+                <img src="/static/img/no_results_found.png" alt="No results found" class="img-fluid rounded">
+            </div>
+        </div>
     </div>
-</div>
-{% if users %}
-<!-- POPULATE THE LIST WITH ALL THE USERS OR THE SEARCH RESULTS -->
-<div class="table-responsive-md mt-3">
-    <table class="table bg-light table-striped w-auto m-auto shadow-lg">
-        <thead>
-            <tr class="bg-purple text-white">
-                <th scope="col"></th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">City</th>
-                <th scope="col">Rtgs nr {{ users.len }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr class="clickable-row" data-href="{% url 'user-detail' id=user.id %}">
-                <th class="p-1" scope="row"><img src="{{ user.profile.image.url }}" alt="avatar"
-                        class="small-img rounded-circle">
-                </th>
-                <td>{{ user.first_name }}</td>
-                <td>{{ user.last_name }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.profile.city }}</td>
-                <td>{{ user.profile.rtgs_nr }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% if users.paginator.num_pages > 1 %}
-<nav class="mt-4" aria-label="...">
-    <ul class="pagination justify-content-center">
-        {% if users.has_previous %}
-        <li class="page-item ">
-            <a class="page-link" href="?page=1" tabindex="-2">
-                <i class="fas fa-angle-double-left text-purple"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">
-                <i class="fas fa-angle-left text-purple"></i>
-            </a>
-        </li>
-        {% endif %}
-        <li class="page-item">
-            <span class="page-link text-purple">{{ users.number }}/{{ users.paginator.num_pages }}</span>
-        </li>
-        {% if users.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ users.next_page_number }}">
-                <i class="fas fa-angle-right text-purple"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?page={{ users.paginator.num_pages }}">
-                <i class="fas fa-angle-double-right text-purple"></i>
-            </a>
-        </li>
-        {% endif%}
-    </ul>
-</nav>
-{% endif %}
-{% else %}
-<!-- IMAGE WHEN THERE ARE NO RESULTS FOR THE QUERY -->
-<div class="text-center">
-    <img src="/static/img/no_results_found.png" alt="No results found" class="img-fluid shadow rounded">
 </div>
 {% endif %}
 {% endblock content %}
