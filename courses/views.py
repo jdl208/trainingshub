@@ -100,7 +100,11 @@ class CourseDetailView(DetailView):
         # get the default context data
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         # If user is logged in find all the courses user signed up for otherwise return empty dict.
-        context["signedup"] = Signup.objects.filter(registrant=self.request.user).values_list("course_id", flat=True)
+        user = self.request.user
+        if user.is_authenticated:
+            context["signedup"] = Signup.objects.filter(registrant=user).values_list("course_id", flat=True)
+        else:
+            context["signedup"] = {}
         return context
 
 
@@ -147,12 +151,10 @@ class CourseTypeCreateView(StaffRequiredMixin, CreateView):
     If user is staff the she can create new course types.
     """
 
-    template_name = "courses/course_type_form.html"
     model = Course_type
     form_class = NewCourseTypeForm
-
-    def get_success_url(self):
-        return reverse("course-type-create")
+    template_name = "courses/course_type_form.html"
+    success_url = "/courses/course-type/"
 
     def get_context_data(self, **kwargs):
         kwargs["object_list"] = Course_type.objects.order_by("name")
@@ -167,9 +169,7 @@ class CourseTypeUpdateView(StaffRequiredMixin, UpdateView):
     template_name = "courses/course_type_form.html"
     model = Course_type
     form_class = NewCourseTypeForm
-
-    def get_success_url(self):
-        return reverse("course-type-create")
+    success_url = "/courses/course-type/"
 
     def get_context_data(self, **kwargs):
         kwargs["object_list"] = Course_type.objects.order_by("name")
@@ -194,9 +194,7 @@ class LocationCreateView(StaffRequiredMixin, CreateView):
 
     template_name = "courses/location_form.html"
     form_class = NewLocationForm
-
-    def get_success_url(self):
-        return reverse("location-create")
+    success_url = "/courses/location/"
 
     def get_context_data(self, **kwargs):
         kwargs["object_list"] = Location.objects.order_by("name")
@@ -211,9 +209,7 @@ class LocationUpdateView(StaffRequiredMixin, UpdateView):
     template_name = "courses/location_form.html"
     model = Location
     form_class = NewLocationForm
-
-    def get_success_url(self):
-        return reverse("location-create")
+    success_url = "/courses/location/"
 
     def get_context_data(self, **kwargs):
         kwargs["object_list"] = Location.objects.order_by("name")
