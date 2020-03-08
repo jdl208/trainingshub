@@ -3,7 +3,11 @@
 
 # De Trainingshub
 
-This web app is for a school for Sign language interpreters.
+De Trainingshub is a trainingcenter for Sign language interpreters. You can follow courses which will provide the participant accreditation points to show that their knowledge and skill are being kept on an adequate level to supply their services.
+
+Visitors can easily find courses to whom the can sign up and find every course they singed up for in their account.
+
+Staff users can add courses and other information. They can see how many people already signed up for a course and who they are. Staff users can also see on user level for which courses a user has signed up.
 
 ## UX
 
