@@ -24,7 +24,7 @@ class Course_type(models.Model):
 class Courses(models.Model):
     name = models.CharField(max_length=150)
     course_type = models.ForeignKey(Course_type, on_delete=models.PROTECT, null=False)
-    ngt = models.BooleanField(default=False)
+    ngt = models.BooleanField(default=True)
     schrijftolk = models.BooleanField(default=False)
     asl = models.BooleanField(default=False)
     combitolk = models.BooleanField(default=False)
