@@ -4,6 +4,7 @@ import stripe
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect, render, reverse
+from django.contrib.admin.views.decorators import staff_member_required
 
 from courses.models import Courses
 from trainingshub import settings
@@ -97,14 +98,7 @@ def checkout(request, id):
     return render(request, "signups/checkout.html", context)
 
 
-def is_staff(user):
-    """
-    Test if user is staff so they can get acces to certain areas of the app.
-    """
-    return user.is_staff
-
-
-@user_passes_test(is_staff, login_url="home")
+@staff_member_required(login_url="home")
 def signup_list(request):
     """
     Generate a list with all the upcoming courses. Sorted first coming date first.
@@ -116,7 +110,7 @@ def signup_list(request):
     return render(request, "signups/course-signup-list.html", context)
 
 
-@user_passes_test(is_staff, login_url="home")
+@staff_member_required(login_url="home")
 def signup_list_completed(request):
     """
     Generate a list with all the upcoming courses. Sorted latest date first
@@ -128,7 +122,7 @@ def signup_list_completed(request):
     return render(request, "signups/course-signup-list.html", context)
 
 
-@user_passes_test(is_staff, login_url="home")
+@staff_member_required(login_url="home")
 def signup_detail(request, id):
     """
     Generate a list with all the upcoming courses. Sorted latest date first
