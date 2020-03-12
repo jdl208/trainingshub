@@ -8,9 +8,7 @@ class MakePaymentForm(forms.Form):
 
     credit_card_number = forms.CharField(label="Credit card number", required=False)
     cvc = forms.CharField(label="Security code (CVC)", required=False)
-    expiry_month = forms.ChoiceField(
-        label="Month", choices=MONTH_CHOICES, required=False
-    )
+    expiry_month = forms.ChoiceField(label="Month", choices=MONTH_CHOICES, required=False)
     expiry_year = forms.ChoiceField(label="Year", choices=YEAR_CHOICES, required=False)
     stripe_id = forms.CharField(widget=forms.HiddenInput)
 
@@ -23,7 +21,6 @@ class SignupForm(forms.ModelForm):
             "registrant",
             "company",
             "address",
-            "postcode",
             "postcode",
             "city",
             "additional_information",

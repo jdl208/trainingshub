@@ -31,9 +31,10 @@ def signup(request, id):
 
     # Go to paymentform before confirming registration
     if request.method == "POST" and request.POST["payment_method"] == "CC":
-        s_form = SignupForm(request.POST)
-        s_form = s_form.save()
-        return redirect("checkout", id=s_form.id)
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form = form.save()
+            return redirect("checkout", id=form.id)
 
     # signup for course without paying
     elif request.method == "POST":
@@ -63,6 +64,9 @@ def checkout(request, id):
     """
     signup = Signup.objects.get(pk=id)
     course = Courses.objects.get(id=signup.course_id)
+
+    if signup.registrant != request.user:
+        return redirect(reverse("home"))
     # signup for course and pay via payment provider
     if request.method == "POST":
         payment_form = MakePaymentForm(request.POST)
