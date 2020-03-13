@@ -3,7 +3,6 @@ from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from courses.models import Course_type, Courses, Location
 from signups.models import Signup
-import stripe
 
 
 class TestSignupsViews(TestCase):
@@ -119,11 +118,3 @@ class TestSignupsViews(TestCase):
         self.client.login(username="test@test.test", password="testing321")
         response = self.client.get(reverse("checkout", kwargs={"id": 1}))
         self.assertEqual(response.status_code, 302)
-
-    # def test_checkout_post_succesfull_payment(self):
-    #     self.client.login(username="super@user.com", password="testing321")
-    #     response = self.client.post(
-    #         reverse("checkout", kwargs={"id": 1}),
-    #         {"credit_card_number": "4242424242424242", "cvc": 112, "expiry_month": "1", "expiry_year": "2030"},
-    #     )
-    #     self.assertEqual(response.status_code, 302)
