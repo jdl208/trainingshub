@@ -127,6 +127,7 @@ To make the app function on your local machine you have to have an IDE and Pytho
 4. Set up a bucket in aws S3 and set the acces to public. Create a group with users and a policy with the AmazonS3FullAcces. Save the csv file with keys you received when this is done.
 5. Set up stripe account.
 6. In your local installation set the following environment variables:
+    
     Key|Value
     ---|---
     AWS_ACCESS_KEY_ID|`<in csv file from aws>`
@@ -149,6 +150,7 @@ To make the app function on your local machine you have to have an IDE and Pytho
 
 1. Make sure your app is running locally by following steps above.
 2. Set the config vars in Heroku. Values can also be copied from local installation. 
+    
     Key|Value
     ---|---
     AWS_ACCESS_KEY_ID|`<in csv file from aws>`
