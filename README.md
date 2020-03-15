@@ -37,6 +37,21 @@ As a staff user:
 - I want to see for which courses a user has registered.
 - I want to see a users info.
 
+The design is card based and all the info should be on the screen an accesible at a glance. All the forms are in 1 card on a page. For the styling of the other pages I have created the wireframes below.
+
+Wireframes
+
+Desktop
+- [Landingpage](https://trainingshub.s3.eu-central-1.amazonaws.com/wireframes/Landing+Page.png)
+- [Courses](https://trainingshub.s3.eu-central-1.amazonaws.com/wireframes/Courses.png)
+- [Course detail](https://trainingshub.s3.eu-central-1.amazonaws.com/wireframes/course+detail.png)
+
+Mobile
+- [Landingpage](https://trainingshub.s3.eu-central-1.amazonaws.com/wireframes/Landing+page+Mobile.png)
+- [Courses](https://trainingshub.s3.eu-central-1.amazonaws.com/wireframes/Courses+mobile.png)
+- [Course detail](https://trainingshub.s3.eu-central-1.amazonaws.com/wireframes/Course+detail+mobile.png)
+
+
 ## FEATURES
 
 ### Existing features
