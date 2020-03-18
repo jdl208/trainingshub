@@ -61,12 +61,6 @@ nav img {
     color: white;
 }
 
-/* ACCOUNT  */
-.account-img {
-    max-width: 150px;
-    height: auto;
-}
-
 /* The side navigation menu */
 .sidenav {
     height: 100%;
@@ -177,6 +171,12 @@ nav img {
 th.min,
 td.min {
     width: 1%;
+}
+
+/* ACCOUNT  */
+.account-img {
+    max-width: 150px;
+    height: auto;
 }
 
 /* COURSES */
