@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // CREATE DARK OVERLAY NEXT TO MOBILE SIDENAV
     $("#navbtn").click(function() {
         $(".overlay").addClass("active");
         $("#mySidenav").width(250);
