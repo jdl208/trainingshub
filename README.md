@@ -128,21 +128,23 @@ To make the app function on your local machine you have to have an IDE and Pytho
 5. Set up stripe account.
 6. In your local installation set the following environment variables:
     
-    Key|Value
-    ---|---
-    AWS_ACCESS_KEY_ID|`<in csv file from aws>`
-    AWS_SECRET_ACCESS_KEY|`<in csv file from aws>`
-    DATABSE_URL|`<from heroku setting config vars>`
-    EMAIL_PASSWORD|`<your gmail app specific password>`
-    EMAIL_USER|`<your gmail address>`
-    SECRET_KEY|`<random string>`
-    STRIPE_PUBLISHABLE|`<Test key in stripe account>`
-    STRIPE_SECRET|`<Test key in stripe account>`
+    * AWS_ACCESS_KEY_ID: `<in csv file from aws>`
+    * AWS_SECRET_ACCESS_KEY: `<in csv file from aws>`
+    * DATABSE_URL: `<from heroku setting config vars>`
+    * EMAIL_PASSWORD: `<your gmail app specific password>`
+    * EMAIL_USER: `<your gmail address>`
+    * SECRET_KEY: `<random string>`
+    * STRIPE_PUBLISHABLE: `<Test key in stripe account>`
+    * STRIPE_SECRET: `<Test key in stripe account>`
 
 7. In settings.py change the following:
     - AWS_STORAGE_BUCKET_NAME = `"name of your S3 bucket"`
     - AWS_S3_REGION_NAME = `"region of your bucket"`
-8. When all of this is done correctly. You can run the app by entering the following command on the command line:
+8. Create the 3 course types in the order below:
+    1. Traing
+    2. Meet & Greet
+    3. Knowledge Evening
+9. When all of this is done correctly. You can run the app by entering the following command on the command line:
     > _`python3 manage.py runserver`_
 
 
@@ -151,18 +153,16 @@ To make the app function on your local machine you have to have an IDE and Pytho
 1. Make sure your app is running locally by following steps above.
 2. Set the config vars in Heroku. Values can also be copied from local installation. 
     
-    Key|Value
-    ---|---
-    AWS_ACCESS_KEY_ID|`<in csv file from aws>`
-    AWS_SECRET_ACCESS_KEY|`<in csv file from aws>`
-    DATABSE_URL|`<already filled in when adding postgress addon in heroku>`
-    DEBUG|False
-    DISABLE_COLLECTSTATIC|1
-    EMAIL_PASSWORD|`<your gmail app specific password>`
-    EMAIL_USER|`<your gmail address>`
-    SECRET_KEY|`<random string>`
-    STRIPE_PUBLISHABLE|`<Test key in stripe account>`
-    STRIPE_SECRET|`<Test key in stripe account>`
+    * AWS_ACCESS_KEY_ID: `<in csv file from aws>`
+    * AWS_SECRET_ACCESS_KEY: `<in csv file from aws>`
+    * DATABSE_URL: `<already filled in when adding postgress addon in heroku>`
+    * DEBUG: False
+    * DISABLE_COLLECTSTATIC: 1
+    * EMAIL_PASSWORD: `<your gmail app specific password>`
+    * EMAIL_USER: `<your gmail address>`
+    * SECRET_KEY: `<random string>`
+    * STRIPE_PUBLISHABLE: `<Test key in stripe account>`
+    * STRIPE_SECRET: `<Test key in stripe account>`
 3. In Heroku go to the deploy tab and copy the cli code to link the repositorie to Heroku.
 4. In the command line login by entering heroku login and enter your credentials.
 5. Paste in the code in the terminal copied at step 3.
@@ -176,6 +176,5 @@ The app is now deployed on Heroku.
 * The text from the website was supplied by De Trainingshub. They supplied all the text in dutch and it was translated by Google Translate.
 ### Media
 * The images on the website are also supplied by De Trainingshub.
-###
-Acknowledgements
+### Acknowledgements
 * The image with the overlay and button on the landingpage is taken from the the start bootstrap template [Business Casual](https://startbootstrap.com/previews/business-casual/).
